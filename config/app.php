@@ -181,6 +181,8 @@ return [
         Illuminate\Translation\TranslationServiceProvider::class,
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
+        \Yajra\DataTables\DataTablesServiceProvider::class,
+        Cviebrock\EloquentSluggable\ServiceProvider::class,
 
         /*
          * Package Service Providers...
@@ -194,7 +196,9 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
-
+        \Spatie\Permission\PermissionServiceProvider::class,
+        App\Providers\MyHelperServiceProvider::class,
+        \Maatwebsite\Excel\ExcelServiceProvider::class,
     ],
 
     /*
@@ -210,6 +214,14 @@ return [
 
     'aliases' => Facade::defaultAliases()->merge([
         // 'ExampleClass' => App\Example\ExampleClass::class,
+        'Crypt' => \Illuminate\Support\Facades\Crypt::class,
+        'DB'    => \Illuminate\Support\Facades\DB::class,
+        'Datatables' => \Yajra\DataTables\Facades\DataTables::class,
+        'Session'   => \Illuminate\Support\Facades\Session::class,
+        'Storage'   => \Illuminate\Support\Facades\Storage::class,
+        'Str'       => \Illuminate\Support\Str::class,
+        'Redirect'  => \Illuminate\Support\Facades\Redirect::class,
+        'Excel'     => \Maatwebsite\Excel\Facades\Excel::class,
     ])->toArray(),
 
 ];

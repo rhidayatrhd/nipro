@@ -1,0 +1,334 @@
+@charset "utf-8";
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&family=Noto+Sans+JP:wght@400;500;700;900&family=Noto+Serif+JP:wght@400;500;600;700&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Roboto', 'Arial', 'Helvetica Neue', 'Helvetica', 'sans-serif' !important;
+    font-size: 10px;
+    color: #696868;
+}
+
+body #menuBtn {
+    position: absolute;
+    display: none;
+    inset-block-start: 0;
+    inset-inline-end: 0;
+    inline-size: 40px;
+    block-size: 40px;
+    background: black;
+    text-indent: -10000px;
+    overflow: hidden;
+    cursor: pointer;
+    z-index: 10;
+}
+
+body header {
+    position: relative;
+    block-size: 6em;
+    padding-block-end: 5px;
+    margin-block-start: 0;
+}
+
+header .langauth {
+    position: absolute;
+    inset-block-start: 15px;
+    inset-inline-end: 0px;
+    inset-inline-start: auto;
+    /* inline-size: 350px; */
+    inline-size: 200px;
+    block-size: 25px;
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    padding: 2px;
+}
+
+#headerAuth>.userAuth>a:hover {
+    border-radius: 4px;
+}
+
+.langauth #headerLang,
+.langauth #headerAuth {
+    text-align: center;
+    padding: 1px;
+    list-style-type: none;
+    display: flex;
+    block-size: 25px;
+}
+
+.langauth #headerLang {
+    inline-size: 150px;
+    flex-direction: row-reverse;
+}
+
+.langauth #headerAuth {
+    inset-inline-end: 5px;
+    inline-size: 200px;
+    margin-block-start: auto;
+}
+
+.langauth #headerLang li {
+    inline-size: calc(30% - 10px);
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    padding: 1px;
+}
+
+.langauth #headerLang li a {
+    display: grid;
+}
+
+.langauth #headerLang li a span {
+    font-size: 8px;
+}
+
+.langauth #headerLang img {
+    border: none;
+    block-size: 20px;
+    inline-size: 20px;
+}
+
+.langauth #headerAuth .userAuth {
+    inline-size: 100%;
+}
+
+.langauth #headerAuth .userAuth a {
+    inline-size: calc(50%);
+    padding: 10px 5px 5px 5px;
+    font-size: 13px;
+    font-weight: 300;
+    text-decoration: none;
+    color: #696868;
+}
+
+.langauth #headerAuth .userAuth a span {
+    font-size: 13px;
+}
+
+body header {
+    height: 50px;
+}
+
+body header h1 {
+    padding: 5px 20px;
+}
+
+body header h1 a {
+    display: block;
+    inline-size: 120px;
+    block-size: 40px;
+    background: url(../img/LogoNIPRO1.png) no-repeat;
+    background-size: 100% auto;
+    text-indent: -1000px;
+    margin-top: 10px;
+}
+
+nav.navbar {
+    inline-size: calc(100% - 30%);
+    padding: 5px;
+    inset-block-start: 0;
+    inset-inline-start: 100px;
+    margin-inline-start: 150px;
+
+}
+
+nav .navbar-nav {
+    inline-size: 100%;
+    align-items: center;
+}
+
+nav .navbar-nav .nav-item {
+    inline-size: calc(30%);
+    text-align: center;
+}
+
+nav .navbar-nav .nav-item .nav-link span {
+    color: #696868;
+    font-size: 2em;
+    font-weight: 600;
+}
+
+.langauth #headerLang li:hover,
+.langauth #headerLang li:focus,
+.langauth #headerAuth .userAuth a:hover,
+.langauth #headerAuth .userAuth a:focus,
+.navbar .container-fluid .collapse.navbar-collapse ul li.nav-item:hover,
+.navbar .container-fluid .collapse.navbar-collapse ul li.nav-item:focus,
+.nav-item.dropdown .dropdown-menu li:hover a,
+.nav-item.dropdown .dropdown-menu li:focus a {
+    background: #727171;
+}
+
+.langauth #headerAuth .userAuth a:hover span,
+.langauth #headerAuth .userAuth a:focus span,
+.navbar .container-fluid .collapse.navbar-collapse ul li.nav-item:hover a span,
+.navbar .container-fluid .collapse.navbar-collapse ul li.nav-item:focus a span,
+.nav-item.dropdown .dropdown-menu li:hover a,
+.nav-item.dropdown .dropdown-menu li:focus a,
+.dropdown-menu.show li:hover a,
+.dropdown-menu.show li:focus a,
+.langauth #headerAuth .userAuth a:hover.bi,
+.langauth #headerAuth .userAuth a:focus.bi {
+    color: #fff;
+}
+
+.navbar-nav.menu>li:hover {
+    border-radius: 8px;
+}
+
+.nav-item.dropdown .dropdown-menu {
+    display: none;
+}
+
+.dropdown-menu,
+.dropdown-menu:hover {
+    display: block;
+}
+
+.dropdown-menu,
+.dropdown-menu.show {
+    inset-inline-start: 0;
+    inset-block-start: 50px;
+    inline-size: 185px;
+}
+
+.dropdown-menu li a {
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.computerUpdate {
+    inline-size: 100%;
+    padding: 5px;
+}
+
+.computerUpdate .card {
+    inline-size: 100%;
+}
+
+.card-header {
+    block-size: 35px;
+    align-items: center;
+    margin-inline-start: 1px;
+    inline-size: 100%;
+}
+
+.card-header p {
+    margin-block-end: 0;
+    margin-block-start: -5px;
+}
+
+.content-wrapper .card-body {
+    padding: 3px;
+}
+
+.card-header>a>span>i,
+.card-header>a>i>span {
+    color: var(--bs-btn-color)
+}
+
+.card-header .upload {
+    display: flex;
+    block-size: 30px;
+}
+
+.card-header .upload label {
+    margin: 2px 15px 0 5px;
+}
+
+.card.pc-info .card-header {
+    font-size: 14px;
+}
+
+.card.pc-info .card-body {
+    font-size: 10px;
+}
+
+.card .content-wrapper {
+    margin-block-start: 3px;
+    padding: 5px;
+}
+
+.card-header .upload .form-group {
+    inline-size: 50em;
+    margin-block-start: -2px;
+}
+
+.card-header .upload .form-group input {
+    inline-size: 49em;
+}
+
+.dataTables_wrapper {
+    inline-size: 100%;
+}
+
+table.dataTable {
+    inline-size: 100%;
+}
+
+.card-body #role-table_wrapper div.row {
+    padding-block-end: 5px;
+    border-block-end: var(--bs-card-border-width) solid var(--bs-card-border-color);
+}
+
+.card-body #role-table_wrapper div.row.dt-row {
+    padding-block-end: 0;
+}
+
+#role-table_wrapper div.row .col-sm-12.col-md-5,
+#role-table_wrapper div.row .col-sm-12.col-md-7 {
+    padding: 2px;
+    block-size: 30px;
+    inline-size: 55em;
+}
+
+#role-table_wrapper div.row .col-sm-12.col-md-5 {
+    margin-inline-start: 10px;
+}
+
+.btn-info,
+.bi-eye::before,
+.bi-pencil-square::before,
+.bi-trash::before {
+    color: #fff;
+}
+
+.carousel.slide {
+    /* padding: 15px; */
+    position: relative;
+    opacity: 1;
+    display: block;
+}
+
+.carousel.slide .carousel-item {
+    width: 100%;
+    display: inline-block;
+}
+.carousel-item .img-fluid {
+    height: 600px;
+}
+.carousel-caption {
+    top: 40rem;
+}
+
+.posts.card {
+    height: 100%;
+    width: 100%;
+    padding: 15px;
+    border: none;
+}
+
+.posts.card>div>img,
+.posts.card>img {
+    height: 100%;
+    width: 100%;
+}
+
+.swal-height {
+    height: 40vh;
+}
+
+@media screen and (min-inline-size: 701px) {}

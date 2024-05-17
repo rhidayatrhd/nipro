@@ -1,0 +1,68 @@
+[05-Apr-2024 01:05:29 UTC] PHP Warning:  Module "com_dotnet" is already loaded in Unknown on line 0
+[05-Apr-2024 01:05:29 UTC] PHP Warning:  PHP Startup: Unable to load dynamic library 'oci8_12c' (tried: ./ext/oci8_12c (The specified module could not be found), ./ext/php_oci8_12c.dll (The specified module could not be found)) in Unknown on line 0
+[05-Apr-2024 01:05:29 UTC] PHP Warning:  PHP Startup: Unable to load dynamic library 'oci8_19' (tried: ./ext/oci8_19 (The specified module could not be found), ./ext/php_oci8_19.dll (The specified module could not be found)) in Unknown on line 0
+[05-Apr-2024 01:05:29 UTC] PHP Warning:  PHP Startup: Unable to load dynamic library 'bolt' (tried: ./ext/bolt (The specified module could not be found), ./ext/php_bolt.dll (The specified module could not be found)) in Unknown on line 0
+[05-Apr-2024 01:05:29 UTC] PHP Warning:  PHP Startup: Unable to load dynamic library 'pdo_firebird' (tried: ./ext/pdo_firebird (The specified module could not be found), ./ext/php_pdo_firebird.dll (The specified module could not be found)) in Unknown on line 0
+[05-Apr-2024 01:05:29 UTC] PHP Warning:  PHP Startup: Unable to load dynamic library 'pdo_oci' (tried: ./ext/pdo_oci (The specified module could not be found), ./ext/php_pdo_oci.dll (The specified module could not be found)) in Unknown on line 0
+[05-Apr-2024 01:05:29 UTC] PHP Warning:  require(): open_basedir restriction in effect. File(D:\WebApplications\nipro\vendor\autoload.php) is not within the allowed path(s): (C:\inetpub\wwwroot) in D:\WebApplications\nipro\artisan on line 18
+[05-Apr-2024 01:05:29 UTC] PHP Warning:  require(D:\WebApplications\nipro\vendor\autoload.php): Failed to open stream: Operation not permitted in D:\WebApplications\nipro\artisan on line 18
+[05-Apr-2024 01:05:29 UTC] PHP Fatal error:  Uncaught Error: Failed opening required 'D:\WebApplications\nipro/vendor/autoload.php' (include_path='.;C:\php\pear') in D:\WebApplications\nipro\artisan:18
+Stack trace:
+#0 {main}
+  thrown in D:\WebApplications\nipro\artisan on line 18
+[05-Apr-2024 01:05:42 UTC] PHP Warning:  Module "com_dotnet" is already loaded in Unknown on line 0
+[05-Apr-2024 01:05:42 UTC] PHP Warning:  PHP Startup: Unable to load dynamic library 'oci8_12c' (tried: ./ext/oci8_12c (The specified module could not be found), ./ext/php_oci8_12c.dll (The specified module could not be found)) in Unknown on line 0
+[05-Apr-2024 01:05:42 UTC] PHP Warning:  PHP Startup: Unable to load dynamic library 'oci8_19' (tried: ./ext/oci8_19 (The specified module could not be found), ./ext/php_oci8_19.dll (The specified module could not be found)) in Unknown on line 0
+[05-Apr-2024 01:05:42 UTC] PHP Warning:  PHP Startup: Unable to load dynamic library 'bolt' (tried: ./ext/bolt (The specified module could not be found), ./ext/php_bolt.dll (The specified module could not be found)) in Unknown on line 0
+[05-Apr-2024 01:05:42 UTC] PHP Warning:  PHP Startup: Unable to load dynamic library 'pdo_firebird' (tried: ./ext/pdo_firebird (The specified module could not be found), ./ext/php_pdo_firebird.dll (The specified module could not be found)) in Unknown on line 0
+[05-Apr-2024 01:05:42 UTC] PHP Warning:  PHP Startup: Unable to load dynamic library 'pdo_oci' (tried: ./ext/pdo_oci (The specified module could not be found), ./ext/php_pdo_oci.dll (The specified module could not be found)) in Unknown on line 0
+[05-Apr-2024 01:05:42 UTC] PHP Warning:  require(): open_basedir restriction in effect. File(D:\WebApplications\nipro\vendor\autoload.php) is not within the allowed path(s): (C:\inetpub\wwwroot) in D:\WebApplications\nipro\artisan on line 18
+[05-Apr-2024 01:05:42 UTC] PHP Warning:  require(D:\WebApplications\nipro\vendor\autoload.php): Failed to open stream: Operation not permitted in D:\WebApplications\nipro\artisan on line 18
+[05-Apr-2024 01:05:42 UTC] PHP Fatal error:  Uncaught Error: Failed opening required 'D:\WebApplications\nipro/vendor/autoload.php' (include_path='.;C:\php\pear') in D:\WebApplications\nipro\artisan:18
+Stack trace:
+#0 {main}
+  thrown in D:\WebApplications\nipro\artisan on line 18
+[05-Apr-2024 01:06:14 UTC] PHP Warning:  Module "com_dotnet" is already loaded in Unknown on line 0
+[05-Apr-2024 01:06:14 UTC] PHP Warning:  PHP Startup: Unable to load dynamic library 'oci8_12c' (tried: ./ext/oci8_12c (The specified module could not be found), ./ext/php_oci8_12c.dll (The specified module could not be found)) in Unknown on line 0
+[05-Apr-2024 01:06:14 UTC] PHP Warning:  PHP Startup: Unable to load dynamic library 'oci8_19' (tried: ./ext/oci8_19 (The specified module could not be found), ./ext/php_oci8_19.dll (The specified module could not be found)) in Unknown on line 0
+[05-Apr-2024 01:06:14 UTC] PHP Warning:  PHP Startup: Unable to load dynamic library 'bolt' (tried: ./ext/bolt (The specified module could not be found), ./ext/php_bolt.dll (The specified module could not be found)) in Unknown on line 0
+[05-Apr-2024 01:06:14 UTC] PHP Warning:  PHP Startup: Unable to load dynamic library 'pdo_firebird' (tried: ./ext/pdo_firebird (The specified module could not be found), ./ext/php_pdo_firebird.dll (The specified module could not be found)) in Unknown on line 0
+[05-Apr-2024 01:06:14 UTC] PHP Warning:  PHP Startup: Unable to load dynamic library 'pdo_oci' (tried: ./ext/pdo_oci (The specified module could not be found), ./ext/php_pdo_oci.dll (The specified module could not be found)) in Unknown on line 0
+[05-Apr-2024 01:06:14 UTC] PHP Warning:  require(): open_basedir restriction in effect. File(D:\WebApplications\nipro\vendor\autoload.php) is not within the allowed path(s): (C:\inetpub\wwwroot) in D:\WebApplications\nipro\artisan on line 18
+[05-Apr-2024 01:06:14 UTC] PHP Warning:  require(D:\WebApplications\nipro\vendor\autoload.php): Failed to open stream: Operation not permitted in D:\WebApplications\nipro\artisan on line 18
+[05-Apr-2024 01:06:14 UTC] PHP Fatal error:  Uncaught Error: Failed opening required 'D:\WebApplications\nipro/vendor/autoload.php' (include_path='.;C:\php\pear') in D:\WebApplications\nipro\artisan:18
+Stack trace:
+#0 {main}
+  thrown in D:\WebApplications\nipro\artisan on line 18
+[05-Apr-2024 01:06:23 UTC] PHP Warning:  Module "com_dotnet" is already loaded in Unknown on line 0
+[05-Apr-2024 01:06:23 UTC] PHP Warning:  PHP Startup: Unable to load dynamic library 'oci8_12c' (tried: ./ext/oci8_12c (The specified module could not be found), ./ext/php_oci8_12c.dll (The specified module could not be found)) in Unknown on line 0
+[05-Apr-2024 01:06:23 UTC] PHP Warning:  PHP Startup: Unable to load dynamic library 'oci8_19' (tried: ./ext/oci8_19 (The specified module could not be found), ./ext/php_oci8_19.dll (The specified module could not be found)) in Unknown on line 0
+[05-Apr-2024 01:06:23 UTC] PHP Warning:  PHP Startup: Unable to load dynamic library 'bolt' (tried: ./ext/bolt (The specified module could not be found), ./ext/php_bolt.dll (The specified module could not be found)) in Unknown on line 0
+[05-Apr-2024 01:06:23 UTC] PHP Warning:  PHP Startup: Unable to load dynamic library 'pdo_firebird' (tried: ./ext/pdo_firebird (The specified module could not be found), ./ext/php_pdo_firebird.dll (The specified module could not be found)) in Unknown on line 0
+[05-Apr-2024 01:06:23 UTC] PHP Warning:  PHP Startup: Unable to load dynamic library 'pdo_oci' (tried: ./ext/pdo_oci (The specified module could not be found), ./ext/php_pdo_oci.dll (The specified module could not be found)) in Unknown on line 0
+[05-Apr-2024 01:07:02 UTC] PHP Warning:  Module "com_dotnet" is already loaded in Unknown on line 0
+[05-Apr-2024 01:07:02 UTC] PHP Warning:  PHP Startup: Unable to load dynamic library 'oci8_12c' (tried: ./ext/oci8_12c (The specified module could not be found), ./ext/php_oci8_12c.dll (The specified module could not be found)) in Unknown on line 0
+[05-Apr-2024 01:07:02 UTC] PHP Warning:  PHP Startup: Unable to load dynamic library 'oci8_19' (tried: ./ext/oci8_19 (The specified module could not be found), ./ext/php_oci8_19.dll (The specified module could not be found)) in Unknown on line 0
+[05-Apr-2024 01:07:02 UTC] PHP Warning:  PHP Startup: Unable to load dynamic library 'bolt' (tried: ./ext/bolt (The specified module could not be found), ./ext/php_bolt.dll (The specified module could not be found)) in Unknown on line 0
+[05-Apr-2024 01:07:02 UTC] PHP Warning:  PHP Startup: Unable to load dynamic library 'pdo_firebird' (tried: ./ext/pdo_firebird (The specified module could not be found), ./ext/php_pdo_firebird.dll (The specified module could not be found)) in Unknown on line 0
+[05-Apr-2024 01:07:02 UTC] PHP Warning:  PHP Startup: Unable to load dynamic library 'pdo_oci' (tried: ./ext/pdo_oci (The specified module could not be found), ./ext/php_pdo_oci.dll (The specified module could not be found)) in Unknown on line 0
+[05-Apr-2024 01:07:02 UTC] PHP Warning:  Unknown: open_basedir restriction in effect. File(C:\ProgramData\ComposerSetup\bin\composer.phar) is not within the allowed path(s): (C:\inetpub\wwwroot) in Unknown on line 0
+[05-Apr-2024 01:07:02 UTC] PHP Warning:  Phar::mapPhar(): open_basedir restriction in effect. File(C:\ProgramData\ComposerSetup\bin\composer.phar) is not within the allowed path(s): (C:\inetpub\wwwroot) in C:\ProgramData\ComposerSetup\bin\composer.phar on line 28
+[05-Apr-2024 01:07:02 UTC] PHP Warning:  require(): open_basedir restriction in effect. File(composer.phar) is not within the allowed path(s): (C:\inetpub\wwwroot) in C:\ProgramData\ComposerSetup\bin\composer.phar on line 29
+[05-Apr-2024 01:07:02 UTC] PHP Warning:  require(phar://composer.phar/bin/composer): Failed to open stream: phar error: invalid url or non-existent phar "phar://composer.phar/bin/composer" in C:\ProgramData\ComposerSetup\bin\composer.phar on line 29
+[05-Apr-2024 01:07:02 UTC] PHP Fatal error:  Uncaught Error: Failed opening required 'phar://composer.phar/bin/composer' (include_path='.;C:\php\pear') in C:\ProgramData\ComposerSetup\bin\composer.phar:29
+Stack trace:
+#0 {main}
+  thrown in C:\ProgramData\ComposerSetup\bin\composer.phar on line 29
+[05-Apr-2024 01:09:56 UTC] PHP Warning:  Module "com_dotnet" is already loaded in Unknown on line 0
+[05-Apr-2024 01:09:56 UTC] PHP Warning:  PHP Startup: Unable to load dynamic library 'oci8_12c' (tried: ./ext/oci8_12c (The specified module could not be found), ./ext/php_oci8_12c.dll (The specified module could not be found)) in Unknown on line 0
+[05-Apr-2024 01:09:56 UTC] PHP Warning:  PHP Startup: Unable to load dynamic library 'oci8_19' (tried: ./ext/oci8_19 (The specified module could not be found), ./ext/php_oci8_19.dll (The specified module could not be found)) in Unknown on line 0
+[05-Apr-2024 01:09:56 UTC] PHP Warning:  PHP Startup: Unable to load dynamic library 'bolt' (tried: ./ext/bolt (The specified module could not be found), ./ext/php_bolt.dll (The specified module could not be found)) in Unknown on line 0
+[05-Apr-2024 01:09:56 UTC] PHP Warning:  PHP Startup: Unable to load dynamic library 'pdo_firebird' (tried: ./ext/pdo_firebird (The specified module could not be found), ./ext/php_pdo_firebird.dll (The specified module could not be found)) in Unknown on line 0
+[05-Apr-2024 01:09:56 UTC] PHP Warning:  PHP Startup: Unable to load dynamic library 'pdo_oci' (tried: ./ext/pdo_oci (The specified module could not be found), ./ext/php_pdo_oci.dll (The specified module could not be found)) in Unknown on line 0
+[05-Apr-2024 01:09:56 UTC] PHP Warning:  require(): open_basedir restriction in effect. File(D:\WebApplications\nipro\vendor\autoload.php) is not within the allowed path(s): (C:\inetpub\wwwroot) in D:\WebApplications\nipro\artisan on line 18
+[05-Apr-2024 01:09:56 UTC] PHP Warning:  require(D:\WebApplications\nipro\vendor\autoload.php): Failed to open stream: Operation not permitted in D:\WebApplications\nipro\artisan on line 18
+[05-Apr-2024 01:09:56 UTC] PHP Fatal error:  Uncaught Error: Failed opening required 'D:\WebApplications\nipro/vendor/autoload.php' (include_path='.;C:\php\pear') in D:\WebApplications\nipro\artisan:18
+Stack trace:
+#0 {main}
+  thrown in D:\WebApplications\nipro\artisan on line 18
