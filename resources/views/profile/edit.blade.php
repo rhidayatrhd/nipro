@@ -2,6 +2,7 @@
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
             {{ __('Profile') }}
+            <h1><span class="bg-alert-info">Test</span></h1>
         </h2>
     </x-slot>
 

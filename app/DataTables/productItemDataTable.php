@@ -28,14 +28,14 @@ class productItemDataTable extends DataTable
         ->addIndexColumn()
         ->addColumn('action', function ($row) {
             $action = '';
-            if (Gate::allows('read products/productitems')) {
+            if (Gate::allows('read masterdatas/productitems')) {
                 // $action = '<button type="button" data-id=' . $row->id . ' data-jenis="show" class="btn btn-light btn-sm action"><i class="ti-eye"></i></button>';
-                $action = '<a type="button" href="/products/productitems/' . $row->id . '" class="btn btn-light btn-sm"><i class="ti-eye"></i></a>';
+                $action = '<a type="button" href="/masterdatas/productitems/' . $row->id . '" class="btn btn-light btn-sm"><i class="ti-eye"></i></a>';
             }
-            if (Gate::allows('update products/productitems')) {
+            if (Gate::allows('update masterdatas/productitems')) {
                 $action .= ' <button type="button" data-id=' . $row->id . ' data-jenis="update" class="btn btn-success btn-sm action"><i class="ti-pencil"></i></button>';
             }
-            if (Gate::allows('delete products/productitems')) {
+            if (Gate::allows('delete masterdatas/productitems')) {
                 $action .= ' <button type="button" data-id=' . $row->id . ' data-jenis="delete" class="btn btn-danger btn-sm action"><i class="ti-trash"></i></button>';
             }
             return $action;
@@ -51,11 +51,11 @@ class productItemDataTable extends DataTable
     public function query(productItem $model): QueryBuilder
     {
         // return $model->newQuery();
-        $query = productItem::join('product_categories', 'product_categories.id', '=', 'product_items.category_id')
+        $query = productItem::join('categories', 'categories.id', '=', 'product_items.category_id')
         ->join('users', 'users.id', '=', 'product_items.user_id')
         ->select([
             'product_items.id',
-            'product_categories.name as category',
+            'categories.name as category',
             'product_items.title',
             'product_items.slug',
             'users.name',
@@ -77,8 +77,7 @@ class productItemDataTable extends DataTable
                     ->columns($this->getColumns())
                     ->minifiedAjax()
                     //->dom('Bfrtip')
-                    ->orderBy(1);
-    }
+                    ->orderBy(1, 'asc');    }
 
     /**
      * Get the dataTable columns definition.

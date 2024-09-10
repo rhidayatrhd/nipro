@@ -146,16 +146,16 @@
                                 <a class="dropdown-item" href="#">Notifikasi</a>
                             </li> -->
                     <li class="menu-content ps-menu">
-                        <a href="#">
+                        <a href="{{ route('profile.edit') }}">
                             <div class="description">
                                 <i class="ti-user"></i> Profile
                             </div>
                         </a>
-                        <a href="#">
+                        <!-- <a href="#">
                             <div class="description">
                                 <i class="ti-settings"></i> Setting
                             </div>
-                        </a>
+                        </a> -->
                         <a href="{{ Route('logout') }}" class="nav-link" onclick="
                             event.preventDefault(); 
                             document.getElementById('formLogout').submit();">

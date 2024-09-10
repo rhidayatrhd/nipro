@@ -12,13 +12,12 @@ return new class extends Migration
      * @return void
      */
     public function up()
-    {
+    { 
         Schema::create('computers', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('cpu_id')->nullable();
-            $table->foreignId('hardware_id')->nullable();
+            $table->id(); 
             $table->string('pchost')->unique();
-            $table->string('name');
+            $table->string('hpchost')->nullable();
+            $table->string('asset_id')->nullable();
             $table->string('pctype');
             $table->string('brand');
             $table->string('model');
@@ -29,7 +28,10 @@ return new class extends Migration
             $table->string('purchyear')->nullable();
             $table->string('username');
             $table->string('userlevel');
-            $table->string('userdept');
+            $table->string('userdept')->nullable();
+            $table->string('cost_ctr')->nullable();
+            $table->foreignId('dept_id')->default(0);
+            $table->foreignId('sect_id')->default(0);
             $table->string('useremail');
             $table->string('osystem');
             $table->string('spreadsheet');

@@ -13,7 +13,7 @@ class RoleController extends Controller
     // Membuat permission menggunakan contructor
     public function __construct()
     {
-        $this->middleware('can:create configurations/role')->only('create');
+        $this->middleware('can:admin')->only('create') || $this->middleware('can:configurations/role')->only('create');
     } 
     
     /**
@@ -24,7 +24,7 @@ class RoleController extends Controller
     public function index(RoleDataTable $dataTable)
     {
         // \dd($dataTable);
-        $this->authorize('read configurations/role');
+        $this->authorize('admin', 'read configurations/role');
         return $dataTable->render('configurations.role', [
             'menu'     => 'Configuration',
             'title'     => 'Role'
@@ -37,8 +37,13 @@ class RoleController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create()
-    {
-        return \view('configurations.role-action', ['role' => new Role()]);
+    { 
+        return \view('configurations.role-action', [
+            'role' => new Role(),
+            'menu'     => 'Configuration',
+            'title'     => 'Create Role',
+            ]
+        );
     }
 
     /**

@@ -13,13 +13,13 @@
     </div>
     <div class="content-wrapper">
         <div class="row same-height">
-            <div class="col-md-12"> 
+            <div class="col-md-12">
                 <div class="card">
                     <div class="card-header">
                         <!-- <h4>Role</h4> -->
-                        @if(request()->user()->can('create configurations/role'))
+                        @canany(['create configurations/role','admin'])
                         <button type="button" class="btn btn-primary mb-3 btn-add">Add Data</button>
-                        @endif
+                        @endcan
                     </div>
                     <div class="card-body">
                         {{ $dataTable->table() }}
@@ -49,27 +49,27 @@
     const modal = new bootstrap.Modal($('#modalRoleAction'))
 
     $('.btn-add').on('click', function() {
-        $.ajax({ 
+        $.ajax({
             method: 'get',
             url: `{{ url('configurations/role/create') }}`,
             success: function(res) {
                 $('#modalRoleAction').find('.modal-dialog').html(res)
                 modal.show()
-                store()
+                store();
             }
         })
-    }) 
+    })
 
     function store() {
         $('#formRoleAction').on('submit', function(e) {
             e.preventDefault()
 
             const _form = this
-            const formData = new FormData(_form) 
+            const formData = new FormData(_form)
             const url = this.getAttribute('action')
 
             $.ajax({
-                method: 'POST', 
+                method: 'POST',
                 url,
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -111,7 +111,7 @@
                 confirmButtonText: "Yes, delete it!"
             }).then(t => {
                 t.isConfirmed &&
-                    $.ajax({ 
+                    $.ajax({
                         method: 'DELETE',
                         url: `{{ url('configurations/role/') }}/${id}`,
                         headers: {

@@ -18,9 +18,9 @@
                 <div class="card">
                     <div class="card-header">
                         <!-- <h4>Permission</h4> -->
-                        @if(request()->user()->can('create configurations/permission'))
+                        @canany(['create configurations.permission' , 'admin'])
                         <button type="button" class="btn btn-primary mb-3 btn-add">Add Data</button>
-                        @endif
+                        @endcanany
                     </div>
                     <div class="card-body">
                         {{ $dataTable->table() }}
@@ -49,7 +49,7 @@
 <script>
     const modal = new bootstrap.Modal($('#modalPermissionAction'))
 
-    $('.btn-add').on('click', function() { 
+    $('.btn-add').on('click', function() {
         $.ajax({
             method: 'get',
             url: `{{ url('configurations/permission/create') }}`,

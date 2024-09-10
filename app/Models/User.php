@@ -22,7 +22,8 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
-        'dept',
+        'dept_id',
+        'sect_id'
     ];
 
     /**
@@ -44,8 +45,18 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    // public function role()
-    // {
-    //     return $this->belongsTo('\App\Role', 'role_id')->withDefault(['name' => '']);
-    // }
+    public function sections()
+    {
+        return $this->belongsTo(Section::class, 'sect_id');
+    }
+
+    public function departments()
+    {
+        return $this->belongsTo(Department::class, 'dept_id');
+    }
+
+    public function role()
+    {
+        return $this->belongsTo('\App\Role', 'role_id')->withDefault(['name' => '']);
+    }
 }

@@ -1,6 +1,9 @@
 @extends('layouts.main')
 
 @section('container')
+@if(getProducts()->isEmpty())
+    <img src="{{ asset('/img/nipro.jpg') }}" width="100%" class="img-fluid row-cols-4 w-100">
+@else
 <div class="carousel slide carousel-fade" id="NIJCarousel" data-bs-ride="carousel">
 
     <ul class="carousel-indicators">
@@ -39,7 +42,7 @@
                     <div class="carousel-caption {{ $slid }}">
                         <h2>{{ $menu->name }}</h2>
                         <p>{{ $menu->excerpt }}</p>
-                        <p><a href="/posts?productcategory={{ $menu->slug }}" class="btn btn-lg btn-primary">Read more..</a></p>
+                        <p id="btn"><a href="/posts?categories={{ $menu->slug }}" class="btn btn-lg btn-primary">Read more..</a></p>
                     </div>
                 </div>
             </div>
@@ -56,10 +59,6 @@
         <span class="visually-hidden">Next</span>
     </button>
 </div>
-
-<footer class="container mt-3">
-    <p class="float-end"><a href="#">Back to top</a></p>
-    <p>&copy; 2023-2024 PT. NIPRO INDONESIA JAYA</p>
-</footer>
+@endif
 
 @endsection

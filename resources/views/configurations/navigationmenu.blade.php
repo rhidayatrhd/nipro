@@ -18,9 +18,9 @@
                  <div class="card">
                      <div class="card-header">
                          <!-- <h4>Role</h4> -->
-                         @if(request()->user()->can('create configurations/navigationmenu'))
-                         <button type="button" class="btn btn-primary mb-3 btn-add">Add Data</button>
-                         @endif
+                         @canany(['create configurations/navigationmenu','admin'])
+                            <button type="button" class="btn btn-primary mb-3 btn-add">Add Data</button>
+                         @endcan
                      </div>
                      <div class="card-body">
                          {{ $dataTable->table() }}
@@ -33,7 +33,7 @@
          <div class="modal-dialog modal-lg"></div>
      </div>
  </div>
- @endsection 
+ @endsection
 
  @push('js')
  <script src="{{ asset('vendor/jquery/jquery.min.js') }}"></script>
@@ -52,7 +52,7 @@
              method: 'get',
              url: `{{ url('configurations/navigationmenu/create') }}`,
              success: function(res) {
-                //  console.log(res);
+                 //  console.log(res);
                  $('#modalNavigationAction').find('.modal-dialog').html(res)
                  modal.show()
                  store()
@@ -102,7 +102,7 @@
          let id = data.id
          let jenis = data.jenis
 
-        //  console.log(data); 
+         //  console.log(data); 
 
          if (jenis == 'delete') {
              Swal.fire({
@@ -134,7 +134,7 @@
              method: 'get',
              url: `{{ url('configurations/navigationmenu/') }}/${id}/edit`,
              success: function(res) {
-                //  console.log(res)
+                 //  console.log(res)
                  $('#modalNavigationAction').find('.modal-dialog').html(res)
                  modal.show()
                  store()

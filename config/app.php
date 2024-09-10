@@ -215,7 +215,6 @@ return [
     'aliases' => Facade::defaultAliases()->merge([
         // 'ExampleClass' => App\Example\ExampleClass::class,
         'Crypt' => \Illuminate\Support\Facades\Crypt::class,
-        'DB'    => \Illuminate\Support\Facades\DB::class,
         'Datatables' => \Yajra\DataTables\Facades\DataTables::class,
         'Session'   => \Illuminate\Support\Facades\Session::class,
         'Storage'   => \Illuminate\Support\Facades\Storage::class,

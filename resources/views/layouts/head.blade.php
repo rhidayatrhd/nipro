@@ -65,9 +65,9 @@
 
                     <ul class="dropdown-menu">
                         @foreach(getProducts() as $item)
-                        <li><a href="/posts?productcategory={{ $item->slug }}" class="dropdown-item">{{ $item->name }}</a></li>
+                        <li><a href="/posts?categories={{ $item->slug }}" class="dropdown-item">{{ $item->name }}</a></li>
                         @endforeach
-                    </ul>
+                    </ul> 
                 </li>
                 <li class="nav-item">
                     <a href="/about" class="nav-link"><span>About Us</span></a>

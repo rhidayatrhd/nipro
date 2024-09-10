@@ -50,6 +50,7 @@ return new class extends Migration
             $table->string('ram_cap');
             $table->foreignId('dept_id');
             $table->foreignId('sect_id');
+            $table->foreignId('user_id');
             $table->string('flag')->nullable();
             $table->timestamps();
         });

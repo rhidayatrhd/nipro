@@ -2,17 +2,18 @@
 
 namespace App\Models;
 
+use Spatie\Sluggable\HasSlug;
+use Spatie\Sluggable\SlugOptions;
 use Illuminate\Database\Eloquent\Model;
 use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Spatie\Sluggable\HasSlug;
-use Spatie\Sluggable\SlugOptions;
 
-class ProductCategory extends Model
+class Category extends Model
 {
     use HasFactory, Sluggable, HasSlug;
 
     protected $guarded = ['id'];
+    protected $table = 'categories';
 
     public function Posts()
     {
@@ -33,11 +34,10 @@ class ProductCategory extends Model
         ];
     }
 
-    public function getSlugOptions() : SlugOptions
-     {
+    public function getSlugOptions(): SlugOptions
+    {
         return SlugOptions::create()
             ->generateSlugsFrom('name')
             ->saveSlugsTo('slug');
     }
-
 }

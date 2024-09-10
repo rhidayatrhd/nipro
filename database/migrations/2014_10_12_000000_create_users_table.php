@@ -23,6 +23,7 @@ return new class extends Migration
             $table->string('image')->nullable();
             $table->string('is_admin')->default(false);
             $table->foreignId('dept_id');
+            $table->foreignId('sect_id');
             $table->rememberToken();
             $table->timestamps();
         });

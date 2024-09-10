@@ -13,7 +13,7 @@ class ImportPCController extends Controller
         // dd($request->all());
 
         $this->validate($request, [
-            'pcfile'  => 'required|mimes:csv,xls,xlsx,xlsb'
+            'pcfile'  => 'required|mimes:csv,xls,xlsx'
         ]);
 
         $file = $request->file('pcfile');

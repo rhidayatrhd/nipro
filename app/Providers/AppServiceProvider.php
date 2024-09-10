@@ -2,7 +2,7 @@
 
 namespace App\Providers;
 
-use App\Models\ProductCategory;
+use App\Models\Category;
 use App\Models\User;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\Gate;
@@ -27,12 +27,12 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        // Paginator::useBootstrap();
-        // Gate::define('admin', function(User $user) {
-        //     return $user->is_admin || $user->userrole->role === 'Admin';
-        // });
+        Paginator::useBootstrap();
+        Gate::define('admin', function(User $user) {
+            return $user->is_admin || $user->role === 'Admin';
+        });
 
-        // $menuItems = ProductCategory::all();
+        // $menuItems = Category::all();
         // \view()->share('menuItems', $menuItems);
-    }
+    } 
 }

@@ -1,7 +1,7 @@
 <div class="modal-content">
-    <form action="{{ $productcategory->id ? route('productcategories.update', $productcategory->id) : route('productcategories.store') }}" method="post" id="formProductCategoryAction">
+    <form action="{{ $category->id ? route('productcategories.update', $category->id) : route('productcategories.store') }}" method="post" id="formProductCategoryAction">
         @csrf
-        @if($productcategory->id)
+        @if ($category->id)
         @method('put')
         @endif
         <div class="modal-header">
@@ -12,17 +12,24 @@
             <div class="row">
                 <div class="col-md-6">
                     <div class="mb-3">
-                        <label for="title" class="form-label">Product Category</label>
-                        <input type="text" name="name" id="name" placeholder="Product Category" value="{{ old('name', $productcategory->name) }}" class="form-control">
+                        <label for="name" class="form-label">Product Category</label>
+                        @if($category->id)
+                        <input type="text" name="name" id="name" placeholder="Product Category" value="{{ old('name', $category->name) }}" class="form-control" disabled readonly>
+                        @else
+                        <input type="text" name="name" id="name" placeholder="Product Category" value="{{ old('name', $category->name) }}" class="form-control">
+                        @endif
                     </div>
                 </div>
                 <div class="col-md-6">
                     <div class="mb-3">
                         <label for="image" class="form-label">Image Category</label>
-                        @if($productcategory->image)
-                        <img src="{{ asset('storage/' . $productcategory->image) }}" class="img-preview img-fluid mb-3 col-sm-5 form-control">
+                        @if($category->id)
+                        <input type="hidden" name="oldImage" value="{{ $category->image }}">
+                        @endif
+                        @if($category->image)
+                        <img src="{{ asset('storage/' . $category->image) }}" class="img-preview img-fluid mb-3 col-sm-5 form-control d-block">
                         @else
-                        <img class="img-preview img-fluid mb-3 col-sm-5">
+                        <img class="img-preview img-fluid mb-3 col-sm-5 d-block">
                         @endif
                         <input type="file" class="form-control" name="image" id="image" onchange="previewImage()">
                     </div>
@@ -32,14 +39,18 @@
                 <div class="col-md-12">
                     <div class="mb-3">
                         <label for="excerpt" class="form-label">Excerpt of Category</label>
-                        <textarea type="textarea" name="excerpt" id="excerpt" placeholder="Excerpt Product" value="{{ old('excerpt') }}" class="form-control"><?php echo $productcategory->excerpt?></textarea>
+                        <textarea type="textarea" name="excerpt" id="excerpt" placeholder="Excerpt Product" value="{{ old('excerpt') }}" class="form-control"><?php echo $category->excerpt ?></textarea>
                     </div>
                 </div>
             </div>
         </div>
         <div class="modal-footer">
+            @if($category->id)
+            <button type="submit" href="/masterdatas/productcategories/{{ $category->id }}" class="btn btn-primary">Save</button>
+            @else
             <button type="submit" class="btn btn-primary">Save</button>
-            <a href="/products/productcategories" class="btn btn-secondary">Cancel</a>
+            @endif
+            <a href="/masterdatas/productcategories" class="btn btn-secondary">Cancel</a>
         </div>
     </form>
 </div>

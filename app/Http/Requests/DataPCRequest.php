@@ -26,7 +26,6 @@ class DataPCRequest extends FormRequest
     {
         return [
             'pchost'    => ['required', Rule::unique('computers')->ignore($this->datapc)],
-            'name'      => 'required',
             'pctype'    => 'required',
             'brand'     => 'required',
             'model'     => 'required',
@@ -34,15 +33,6 @@ class DataPCRequest extends FormRequest
             'ipadrs'    => 'required',
             'ram'       => 'required',
             'hdd'       => 'required',
-            'purchyear' => 'required',
-            'username'  => 'required',
-            'userlevel' => 'required',
-            'userdept'  => 'required',
-            'useremail' => 'required',
-            'osystem'   => 'required',
-            'spreadsheet' => 'required',
-            'usedfor'   => 'required',
-            'antivirus' => 'required',
         ];
     }
 }

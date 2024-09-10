@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use Illuminate\Validation\Rule;
 use Illuminate\Foundation\Http\FormRequest;
 
 class NavigationMenuRequest extends FormRequest
@@ -24,7 +25,7 @@ class NavigationMenuRequest extends FormRequest
     public function rules()
     {
         return [
-            'name'      => 'required',
+            'name'      => ['required', Rule::unique('navigations')->ignore($this->navigation)],
             'url'       => 'required'
         ];
     }

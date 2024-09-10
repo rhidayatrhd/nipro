@@ -3,7 +3,6 @@
 namespace App\DataTables;
 
 use App\Models\Category;
-use App\Models\ProductCategory;
 use Yajra\DataTables\Html\Button;
 use Yajra\DataTables\Html\Column;
 use Illuminate\Support\Facades\Gate;
@@ -25,18 +24,17 @@ class CategoryDataTable extends DataTable
     public function dataTable(QueryBuilder $query): EloquentDataTable
     {
         return (new EloquentDataTable($query))
-            // ->setRowId('id'); 
-            ->addIndexColumn() 
-            ->addColumn('action', function ($row) { 
+            ->addIndexColumn()
+            ->addColumn('action', function ($row) {
                 $action = '';
-                if (Gate::allows('read products/productcategories')) {
+                if (Gate::allows('read masterdatas/productcategories')) {
                     // $action = '<button type="button" data-id=' . $row->id . ' data-jenis="show" class="btn btn-light btn-sm action"><i class="ti-eye"></i></button>';
-                    $action = '<a type="button" href="/products/productcategories/' . $row->id . '" class="btn btn-light btn-sm"><i class="ti-eye"></i></a>';
+                    $action = '<a type="button" href="/masterdatas/productcategories/' . $row->id . '" class="btn btn-light btn-sm"><i class="ti-eye"></i></a>';
                 }
-                if (Gate::allows('update products/productcategories')) {
+                if (Gate::allows('update masterdatas/productcategories')) {
                     $action .= ' <button type="button" data-id=' . $row->id . ' data-jenis="update" class="btn btn-success btn-sm action"><i class="ti-pencil"></i></button>';
                 }
-                if (Gate::allows('delete products/productcategories')) {
+                if (Gate::allows('delete masterdatas/productcategories')) {
                     $action .= ' <button type="button" data-id=' . $row->id . ' data-jenis="delete" class="btn btn-danger btn-sm action"><i class="ti-trash"></i></button>';
                 }
                 return $action;
@@ -49,7 +47,7 @@ class CategoryDataTable extends DataTable
      * @param \App\Models\Category $model
      * @return \Illuminate\Database\Eloquent\Builder
      */
-    public function query(ProductCategory $model): QueryBuilder
+    public function query(Category $model): QueryBuilder
     {
         return $model->newQuery();
     }
@@ -62,12 +60,12 @@ class CategoryDataTable extends DataTable
     public function html(): HtmlBuilder
     {
         return $this->builder()
-            ->parameters(['searchDelay' => 1000])
-            ->setTableId('category-table')
-            ->columns($this->getColumns())
-            ->minifiedAjax()
-            //->dom('Bfrtip')
-            ->orderBy(1);
+                    ->parameters(['searchDelay' => 1000])
+                    ->setTableId('category-table')
+                    ->columns($this->getColumns())
+                    ->minifiedAjax()
+                    //->dom('Bfrtip')
+                    ->orderBy(1, 'asc');
     }
 
     /**
@@ -78,7 +76,6 @@ class CategoryDataTable extends DataTable
     public function getColumns(): array
     {
         return [
-            // Column::make('id'),
             Column::make('DT_RowIndex')->title('No')->searchable(\false)->orderable(\false),
             Column::make('name'),
             Column::make('excerpt')->title('Excerpt of Product Category'),

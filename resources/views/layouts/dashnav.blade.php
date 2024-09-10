@@ -26,8 +26,7 @@
             </li>
 
             @foreach(getMenus() as $menu)
-            @can('read '.$menu->url)
-            @if($menu->sort !== 0)
+            @if($menu->sort === 1)
             @can('admin')
             <li class="{{ request()->segment(1) == $menu->url ? 'active open' : '' }}">
                 <a href="#" class="main-menu has-dropdown">
@@ -36,16 +35,15 @@
                 </a>
                 <ul class="sub-menu {{ request()->segment(1) == $menu->url ? 'expand' : '' }}">
                     @foreach($menu->subMenus as $submenu)
-                    @can('read '.$submenu->url)
                     <li class="{{ request()->segment(1) == explode('/', $submenu->url)[0] && request()->segment(2) == explode('/', $submenu->url)[1] ? 'active' : '' }}">
                         <a href="{{ url($submenu->url) }}" class="link"><span>{{ $submenu->name }}</span></a>
                     </li>
-                    @endcan
                     @endforeach
                 </ul>
             </li>
             @endcan
-            @else
+            @elseif($menu->sort === 0)
+            @can('read '.$menu->url)
             <li class="{{ request()->segment(1) == $menu->url ? 'active open' : '' }}">
                 <a href="#" class="main-menu has-dropdown">
                     <i class="{{ $menu->icon }}"></i>
@@ -61,25 +59,49 @@
                     @endforeach
                 </ul>
             </li>
-            @endif
             @endcan
-            @endforeach
-
-            <!-- @can('read imports')
-            <li class="{{ request()->segment(1) == 'imports' ? 'active open' : '' }}">
-                <a href="" class="main-menu has-dropdown">
-                    <i class="ti-desktop"></i>
-                    <span>Import Data</span>
+            @elseif($menu->sort === 2)
+            <li class="{{ request()->segment(1) == $menu->url ? 'active open' : '' }}">
+                <a href="#" class="main-menu has-dropdown">
+                    <i class="{{ $menu->icon }}"></i>
+                    <span>{{ $menu->name }}</span>
                 </a>
-                <ul class="sub-menu {{ request()->segment(1) == 'imports' ? 'expand' : '' }}">
-                    @can('read imports/datapc')
-                    <li class="{{ request()->segment(1) == 'imports' && request()->segment(2) == 'datapc' ? 'active' : '' }}">
-                        <a href="{{ route('datapc.index') }}" class="link"><span>Import PC Data</span></a>
+                <ul class="sub-menu {{ request()->segment(1) == $menu->url ? 'expand' : '' }}">
+                    @foreach($menu->subMenus as $submenu)
+                    <li class="{{ request()->segment(1) == explode('/', $submenu->url)[0] && request()->segment(2) == explode('/', $submenu->url)[1] ? 'active' : '' }}">
+                        <a href="{{ url($submenu->url) }}" class="link"><span>{{ $submenu->name }}</span></a>
                     </li>
-                    @endcan
+                    @endforeach
                 </ul>
             </li>
-            @endcan -->
+            @endif
+
+            @endforeach
+            <!-- <li class="{{ request()->segment(1) ==  'userguides' ? 'active open' : '' }}">
+                <a href="#" class="main-menu has-dropdown">
+                    <i class="ti-bookmark-alt"></i><span>Training Document</span>
+                </a>
+                <ul class="sub-menu {{ request()->segment(1) == 'userguides' ? 'expand' : '' }}">
+                    <li class="{{ request()->segment(1) == 'userguides' && request()->segment(2) == 'sap_userguide' ? 'active' : '' }}">
+                        <a href="/userguides/sap_userguide" class="link">
+                            <span>SAP Training Material</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+
+            <li class="{{ request()->segment(1) ==  'requestforms' ? 'active open' : '' }}">
+                <a href="#" class="main-menu has-dropdown">
+                    <i class="ti-layout-tab"></i><span>Form Request</span>
+                </a>
+                <ul class="sub-menu {{ request()->segment(1) == 'requestforms' ? 'expand' : '' }}">
+                    <li class="{{ request()->segment(1) == 'requestforms' && request()->segment(2) == 'it_requestform' ? 'active' : '' }}">
+                        <a href="/requestforms/it_requestform" class="link">
+                            <span>IT Form Request</span>
+                        </a>
+                    </li>
+                </ul>
+            </li> -->
 
         </ul>
     </div>

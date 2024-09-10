@@ -9,15 +9,18 @@
  @section('content')
  <title>Nipro &mdash; {{ $title }}</title>
  <div class="main-content">
-     <div class="title">
-         {{ $menu }} - {{ $title }}
-     </div>
+     <div class="title">{{ $menu }} - {{ $title }}</div>
      <div class="content-wrapper">
          <div class="row same-height">
              <div class="col-md-12">
                  <div class="card">
+                     <!-- @if (session()->has('success')) -->
+                     <div class="alert alert-success col-lg-8" role="alert">
+                         {{ session('success') }}
+                     </div>
+                     <!-- @endif -->
                      <div class="card-header">
-                         @if(request()->user()->can('create products/productitems'))
+                         @if(request()->user()->can('create masterdatas/productitems'))
                          <button type="button" class="btn btn-primary mb-3 btn-add">Add Data</button>
                          @endif
                      </div>
@@ -45,20 +48,19 @@
  <script src="{{ asset('vendor/datatables.net-responsive-bs5/js/responsive.bootstrap5.min.js') }}"></script>
  <script src="{{ asset('vendor/sweetalert2/sweetalert2.all.min.js') }}"></script>
  <script type="text/javascript" src="{{ asset('js/trix.js') }}"></script>
-
  {{ $dataTable->scripts() }}
 
  <script>
-     const modal = new bootstrap.Modal($('#modalProductItemAction'))
+     const modal = new bootstrap.Modal($('#modalProductItemAction'));
 
      $('.btn-add').on('click', function() {
          $.ajax({
              method: 'get',
-             url: `{{ url('products/productitems/create') }}`,
+             url: `{{ url('masterdatas/productitems/create') }}`,
              success: function(res) {
                  $('#modalProductItemAction').find('.modal-dialog').html(res)
                  modal.show()
-                 store() 
+                 store()
              }
          })
      })
@@ -66,10 +68,10 @@
      function store() {
          $('#formProductItemAction').on('submit', function(e) {
              e.preventDefault();
-
              const _form = this;
              const formData = new FormData(_form);
              const url = this.getAttribute('action');
+
              $.ajax({
                  method: 'POST',
                  url,
@@ -80,29 +82,35 @@
                  processData: false,
                  contentType: false,
                  success: function(res) {
-                     window.LaravelDatatables["productitem-table"].ajax.reload()
-                     modal.hide()
+                    //  console.log(res);
+                     window.LaravelDataTables["productitem-table"].ajax.reload();
+                     modal.hide();
+                     $('.alert.alert-success').html(res.respon.status);
                  },
-                 error: function(res) {
-                     let errors = res.responseJSON?.errors
-                     $(_form).find('.text-danger.text-small').remove()
-                     if (errors) {
-                         for (const [key, value] of Object.entries(errors)) {
-                             $(`[title='${key}']`).parent().append(`<span class="text-danger text-small">${value}</span>`)
-                             $(`[category_id='${key}']`).parent().append(`<span class="text-danger text-small">${value}</span>`)
-                             $(`[body='${key}']`).parent().append(`<span class="text-danger text-small">${value}</span>`)
-                         }
-                     }
-                     console.log(errors);
+                 error: function(res)
+                 {
+                    let errors = res.responseJSON?.remove();
+                    
+                    if (errors)
+                    {
+                        for (const [key, value] of Object.entries(errors))
+                        {
+                            $(`[title='${key}']`).parent().append(`<span class="text-danger text-small">${value}</span>`);
+                            $(`[category_id='${key}']`).parent().append(`<span class="text-danger text-small">${value}</span>`);
+                            $(`[image='${key}']`).parent().append(`<span class="text-danger text-small">${value}</span>`);
+                            $(`[body='${key}']`).parent().append(`<span class="text-danger text-small">${value}</span>`);
+                        }
+                    }
+                    console.log(errors);
                  }
-             })
-         })
+             });
+         });
      }
 
-     $('#productitem-table').on('click', '.action', function() { 
-         let data = $(this).data()
-         let id = data.id
-         let jenis = data.jenis
+     $('#productitem-table').on('click', '.action', function() {
+         let data = $(this).data();
+         let id = data.id;
+         let jenis = data.jenis;
 
          if (jenis == 'delete') {
              Swal.fire({
@@ -117,29 +125,31 @@
                  t.isConfirmed &&
                      $.ajax({
                          method: 'DELETE',
-                         url: `{{ url('products/productitems/') }}/${id}`,
+                         url: `{{ url('masterdatas/productitems/') }}/${id}`,
                          headers: {
                              'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                          },
                          success: function(res) {
-                             window.LaravelDataTables["productitem-table"].ajax.reload()
-                             Swal.fire("Deleted!", res.message, res.status)
+                             window.LaravelDataTables["productitem-table"].ajax.reload();
+                             //  location.reload(true);
+                             Swal.fire("Deleted!", res.message, res.status);
                          }
-                     })
-             })
+                     });
+             });
              return
          }
 
          $.ajax({
              method: 'get',
-             url: `{{ url('products/productitems/') }}/${id}/edit`,
+             url: `{{ url('masterdatas/productitems/') }}/${id}/edit`,
              success: function(res) {
-                 $('#modalProductItemAction').find('.modal-dialog').html(res)
-                 modal.show()
-                 store()
+                 $('#modalProductItemAction').find('.modal-dialog').html(res);
+                 modal.show();
+                 store();
              }
-         })
-     })
+         });
+         return
+     });
  </script>
 
  @endpush

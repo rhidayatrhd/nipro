@@ -17,34 +17,28 @@
         </div>
 
         <!-- Department -->
-        <!-- <div class="mt-4"> 
-            <x-input-label for="dept" :value="__('Department')" />
-            <x-text-input id="dept" class="block mt-1 w-full" type="text" name="dept" :value="old('dept')" required autocomplete="dept" />
-            <x-input-error :messages="$errors->get('dept')" class="mt-2" />
-        </div> -->
-
         <div class="mt-4">
             <x-input-label for="dept" :value="__('Department')" />
-            <select name="dept" id="dept" class="block mt-1 w-full rounded-md">
+            <select name="dept" id="dept" class="block mt-1 w-full rounded-md form-select form-control">
                 <option value="" selected></option>
-                <option value="FINANCE, ACCOUNTING & IT">FINANCE, ACCOUNTING & IT</option>
-                <option value="HR & GA">HR & GA</option>
-                <option value="BLOOD TUBING SET">BLOOD TUBING SET</option>
-                <option value="PURCHASING, PPIC & LOGISTIC">PURCHASING, PPIC & LOGISTIC</option>
-                <option value="AVF, IVCATH & IFSET">AVF, IVCATH & IFSET</option>
-                <option value="INJECTION & EXTRUSION">INJECTION & EXTRUSION</option>
-                <option value="SALES & STERILIZATION">SALES & STERILIZATION</option>
+                @foreach(getDepartments() as $dept)
+                <option value="{{ $dept->id }}">{{ $dept->name }}</option>
+                @endforeach
             </select>
+            <x-input-error :messages="$errors->get('dept')" class="mt-2" />
         </div>
 
-        <!-- <div class="input-group mb-3 mt-4 block">
-            <label for="dept" class="input-group-text">Select Dept</label>
-            <select name="dept" id="dept">
+        <!-- Section -->
+        <div class="mt-4">
+            <x-input-label for="sect" :value="__('Section')" />
+            <select name="sect" id="sect" class="block mt-1 w-full rounded-md form-select">
                 <option value="-1" selected></option>
-                <option value="1">FAD & IT</option>
-                <option value="2">HRGA</option>
+                @foreach(getSections() as $sect)
+                <option value="{{ $sect->id }}">{{ $sect->name }}</option>
+                @endforeach
             </select>
-        </div> -->
+            <x-input-error :messages="$errors->get('sect')" class="mt-2" />
+        </div>
 
         <!-- Password -->
         <div class="mt-4">

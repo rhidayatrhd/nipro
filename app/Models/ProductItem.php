@@ -14,7 +14,7 @@ class ProductItem extends Model
 
     protected $guarded = ['id'];
     // protected $table = ['product_items'];
-    protected $with = ['productcategory', 'author'];
+    protected $with = ['categories', 'author'];
 
     public function scopeFilter($query, array $filters)
     {
@@ -22,9 +22,9 @@ class ProductItem extends Model
             return $query->where('title', 'like', '%' . $search . '%')->orWhere     ('body', 'like', '%' . $search . '%');
         });
 
-        $query->when($filters['productcategory'] ?? \false, function($query, $productcategory) {
-            return $query->whereHas('productcategory', function($query) use ($productcategory) {
-                $query->where('slug', $productcategory);
+        $query->when($filters['categories'] ?? \false, function($query, $category) {
+            return $query->whereHas('categories', function($query) use ($category) {
+                $query->where('slug', $category);
             });
         });
 
@@ -41,7 +41,7 @@ class ProductItem extends Model
         return 'slug';
     }
 
-    public function sluggable(): array
+    public function sluggable(): array 
     {
         return [
             'slug'  => [
@@ -50,9 +50,9 @@ class ProductItem extends Model
         ];
     }
 
-    public function productcategory() 
+    public function categories() 
     {
-        return $this->belongsTo(ProductCategory::class, 'category_id');
+        return $this->belongsTo(Category::class, 'category_id');
     }
 
     public function author() 

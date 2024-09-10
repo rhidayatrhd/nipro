@@ -35,7 +35,7 @@ class UserRoleDataTable extends DataTable
                     ->get();
                     return $roled;
             }) */
-            ->addColumn('action', function ($row) {
+            ->addColumn('action', function ($row) { 
                 $action = '';
                 if (Gate::allows('delete accessmanagements/assignuserrole')) {
                     $action = '<button type="button" data-id=' . $row->id . ' data-jenis="update" class="btn btn-warning btn-sm action"><i class="ti-pencil"></i></button>';
@@ -52,16 +52,18 @@ class UserRoleDataTable extends DataTable
      */
     public function query(User $model): QueryBuilder
     {
-        // return $model->newQuery();
-        $query = User::join('model_has_roles', 'model_has_roles.model_id', '=', 'users.id')
-                 ->join('roles', 'roles.id', '=', 'model_has_roles.role_id')
-                ->select([
-                    'users.id',
-                    'users.name',
-                    'users.dept',
-                    'roles.name as role'
-                ]);
-        return $this->applyScopes($query);
+        return $model->newQuery();
+        // $query = User::join('model_has_roles', 'model_has_roles.model_id', '=', 'users.id')
+        //          ->join('sections', 'sections.id', '=', 'users.sect_id')
+        //          ->join('roles', 'roles.id', '=', 'model_has_roles.role_id')
+        //          ->join('departments', 'departments.id', '=', 'sections.dept_id')
+        //         ->select([
+        //             'users.id',
+        //             'users.name',
+        //             'departments.name as dept',
+        //             'roles.name as role'
+        //         ]);
+        // return $this->applyScopes($query);
     }
 
     /**
@@ -77,7 +79,7 @@ class UserRoleDataTable extends DataTable
             ->columns($this->getColumns())
             ->minifiedAjax()
             //->dom('Bfrtip')
-            ->orderBy(0, 'ASC');
+            ->orderBy(1, 'asc');
     }
 
     /**
@@ -89,7 +91,7 @@ class UserRoleDataTable extends DataTable
     {
         return [
             Column::make('id')
-                    ->width(20),
+                    ->width(10),
             Column::make('name'),
             Column::make('dept')
                 ->title('Department'),
@@ -99,7 +101,7 @@ class UserRoleDataTable extends DataTable
             Column::computed('action')
                 ->exportable(false)
                 ->printable(false)
-                ->width(60)
+                ->width(70)
                 ->addClass('text-center'),
         ];
     }

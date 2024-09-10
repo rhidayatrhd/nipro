@@ -3,11 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Navigation;
-use App\Models\Permission;
 use Illuminate\Http\Request;
-use App\Models\NavigationMenu;
 use App\Http\Requests\NavigationRequest;
-use App\Http\Requests\PermissionRequest;
 use App\DataTables\NavigationMenuDataTable;
 use App\Http\Requests\NavigationMenuRequest;
 
@@ -16,7 +13,9 @@ class NavigationMenuController extends Controller
     // Membuat permission menggunakan contructor
     public function __construct()
     {
-        $this->middleware('can:create configurations/navigationmenu')->only('create');
+        // $this->middleware('can:configurations/navigationmenu')->only('create');
+        $this->middleware('can:admin')->only('create') || $this->middleware('can:configurations/navigationmenu')->only('create');
+        
     }
 
     /**
@@ -26,7 +25,7 @@ class NavigationMenuController extends Controller
      */
     public function index(NavigationMenuDataTable $dataTable)
     {
-        $this->authorize('read configurations/navigationmenu');
+        $this->authorize('admin', 'read configurations/navigationmenu');
         return $dataTable->render('configurations.navigationmenu', [
             'menu'     => 'Configuration',
             'title'     => 'Navigation Menu'
@@ -117,3 +116,4 @@ class NavigationMenuController extends Controller
         ]);
     }
 }
+

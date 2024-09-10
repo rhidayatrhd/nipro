@@ -3,6 +3,7 @@
 namespace App\DataTables;
 
 use App\Models\Permission;
+use GMP;
 use Yajra\DataTables\Html\Button;
 use Yajra\DataTables\Html\Column;
 use Illuminate\Support\Facades\Gate;
@@ -34,10 +35,10 @@ class PermissionDataTable extends DataTable
         })
         ->addColumn('action', function($row) {
             $action = '';
-            if (Gate::allows('update configurations/permission')) {
+            if (Gate::allows('update configurations/permission') || Gate::allows('admin')) {
                 $action = '<button type="button" data-id=' .$row->id. ' data-jenis="edit" class="btn btn-primary btn-sm action"><i class="ti-pencil"></i></button>';
             }
-            if (Gate::allows('delete configurations/permission')) {
+            if (Gate::allows('delete configurations/permission') || Gate::allows('admin')) {
                 $action .= ' <button type="button" data-id=' .$row->id. ' data-jenis="delete" class="btn btn-danger btn-sm action"><i class="ti-trash"></i></button>';
             }
             return $action;
@@ -68,7 +69,7 @@ class PermissionDataTable extends DataTable
                     ->columns($this->getColumns())
                     ->minifiedAjax()
                     //->dom('Bfrtip')
-                    ->orderBy(1);
+                    ->orderBy(1, 'asc');
     }
 
     /**
@@ -80,7 +81,7 @@ class PermissionDataTable extends DataTable
     {
         return [
             Column::make('DT_RowIndex')->title('No')->searchable(\false)->orderable(\false),
-            Column::make('name'),
+            Column::make('name')->title('Permission Name'),
             Column::make('created_at'),
             Column::make('updated_at'),
             Column::computed('action')

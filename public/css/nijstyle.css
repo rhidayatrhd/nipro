@@ -31,6 +31,11 @@ body header {
     margin-block-start: 0;
 }
 
+body>p.text-center.no-data span.text-center {
+    font-size: 16px;
+    color: crimson;
+}
+
 header .langauth {
     position: absolute;
     inset-block-start: 15px;
@@ -105,7 +110,7 @@ header .langauth {
 }
 
 .langauth #headerAuth .userAuth a span {
-    font-size: 13px;
+    font-size: 15px;
 }
 
 body header {
@@ -295,7 +300,9 @@ table.dataTable {
 .bi-trash::before {
     color: #fff;
 }
-
+.carousel-inner {
+    height: max-content;
+}
 .carousel.slide {
     /* padding: 15px; */
     position: relative;
@@ -308,27 +315,48 @@ table.dataTable {
     display: inline-block;
 }
 .carousel-item .img-fluid {
-    height: 600px;
+    height: 650px;
+    max-width: calc(100% - 20%);
+    padding: 2% 0 0 20%;
 }
-.carousel-caption {
-    top: 40rem;
+/* .carousel-caption {
+    top: 60rem;
+} */
+
+.carousel-caption>p#btn {
+    margin-top: 10px;
 }
 
 .posts.card {
     height: 100%;
     width: 100%;
-    padding: 15px;
+    padding: 20px;
     border: none;
 }
 
 .posts.card>div>img,
 .posts.card>img {
-    height: 100%;
-    width: 100%;
+    height: calc(100% - 20%);
+    width: calc(100% - 20%);
+    padding-left: 20%;
 }
 
 .swal-height {
     height: 40vh;
+}
+
+form .input-group>input#search,
+form .input-group>button.btn-danger {
+    font-size: 15px;
+}
+
+footer>.float-start>p.comp1 {
+    margin-bottom: 0.5rem;
+    font-weight: 900;
+}
+
+footer>.float-start>p.comp {
+    margin-bottom: 0;
 }
 
 @media screen and (min-inline-size: 701px) {}

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+use DB;
 use App\Models\User;
 use Illuminate\View\View;
 use Illuminate\Support\Str;
@@ -34,14 +35,16 @@ class RegisteredUserController extends Controller
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:'.User::class],
-            'dept' => ['required', 'string', 'max:255'],
+            'dept_id' => ['required', 'string', 'max:255'],
+            'sect_id' => ['required', 'string', 'max:255'],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
 
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
-            'dept' => $request->dept,
+            'dept_id' => $request->dept,
+            'sect_id' => $request->sect,
             'password' => Hash::make($request->password),
         ]);
 

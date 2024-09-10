@@ -9,17 +9,23 @@
  @section('content')
  <title>Nipro &mdash; {{ $title }}</title>
  <div class="main-content">
-     <div class="title">
-         {{ $menu }} - {{ $title }}
-     </div>
+     <div class="title">{{ $menu }} - {{ $title }}</div>
      <div class="content-wrapper">
          <div class="row same-height">
              <div class="col-md-12">
                  <div class="card">
+                     @if (session()->has('success'))
+                     <div class="alert alert-success col-lg-8" role="alert">
+                         {{ session('success') }}
+                     </div>
+                     @endif
+                     @if (session()->has('error'))
+                     <div class="alert alert-danger col-lg-8" role="alert">
+                         {{ session('error') }}
+                     </div>
+                     @endif
                      <div class="card-header">
-                         <!-- <h4>Role</h4> -->
-                         @if(request()->user()->can('create products/productcategories'))
-                         <!-- <a href="{{ route('productcategories.create') }}" type="button" class="btn btn-primary">Add Data</a> -->
+                         @if(request()->user()->can('create masterdatas/productcategories'))
                          <button type="button" class="btn btn-primary mb-3 btn-add">Add Data</button>
                          @endif
                      </div>
@@ -46,16 +52,15 @@
  <script src="{{ asset('vendor/datatables.net-responsive/js/dataTables.responsive.min.js') }}"></script>
  <script src="{{ asset('vendor/datatables.net-responsive-bs5/js/responsive.bootstrap5.min.js') }}"></script>
  <script src="{{ asset('vendor/sweetalert2/sweetalert2.all.min.js') }}"></script>
-
  {{ $dataTable->scripts() }}
 
  <script>
-     const modal = new bootstrap.Modal($('#modalCategoryAction'))
+     const modal = new bootstrap.Modal($('#modalCategoryAction'));
 
      $('.btn-add').on('click', function() {
          $.ajax({
              method: 'get',
-             url: `{{ url('products/productcategories/create') }}`,
+             url: `{{ url('masterdatas/productcategories/create') }}`,
              success: function(res) {
                  $('#modalCategoryAction').find('.modal-dialog').html(res);
                  modal.show();
@@ -71,6 +76,7 @@
              const _form = this;
              const formData = new FormData(_form);
              const url = this.getAttribute('action');
+            //  console.log(_form);
              $.ajax({
                  method: 'POST',
                  url,
@@ -81,10 +87,13 @@
                  processData: false,
                  contentType: false,
                  success: function(res) {
+                     // console.log(res);
                      window.LaravelDataTables["category-table"].ajax.reload();
+                     //  location.reload(true);
                      modal.hide();
                  },
                  error: function(res) {
+                    //  console.log(res);
                      let errors = res.responseJSON?.errors;
                      $(_form).find('.text-danger.text-small').remove();
                      if (errors) {
@@ -97,7 +106,7 @@
                      console.log(errors);
                  }
              });
-         })
+         });
      }
 
      $('#category-table').on('click', '.action', function() {
@@ -118,32 +127,33 @@
                  t.isConfirmed &&
                      $.ajax({
                          method: 'DELETE',
-                         url: `{{ url('products/productcategories/') }}/${id}`,
+                         url: `{{ url('masterdatas/productcategories/') }}/${id}`,
                          headers: {
                              'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                          },
                          success: function(res) {
                              window.LaravelDataTables["category-table"].ajax.reload();
+                             //  location.reload(true);
                              Swal.fire("Deleted!", res.message, res.status);
                          }
                      });
              });
              return
-         } 
+         }
          if (jenis == 'show') {
              $.ajax({
                  method: 'get',
-                 url: `{{ url('/products/productcategories/') }}/${id}`, 
+                 url: `{{ url('/masterdatas/productcategories/') }}/${id}`,
                  success: function(res) {
                      $('#modalCategoryAction').find('.modal-dialog').html(res);
                  }
-             })
+             });
              return
          }
          if (jenis == 'update') {
              $.ajax({
                  method: 'get',
-                 url: `{{ url('products/productcategories/') }}/${id}/edit`,
+                 url: `{{ url('masterdatas/productcategories/') }}/${id}/edit`,
                  success: function(res) {
                      $('#modalCategoryAction').find('.modal-dialog').html(res);
                      modal.show();

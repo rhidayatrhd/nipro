@@ -15,7 +15,9 @@ return new class extends Migration
     {
         Schema::create('hardware_groups', function (Blueprint $table) {
             $table->id();
-            $table->string('groupname');
+            $table->string('code');
+            $table->string('name');
+            $table->string('flag')->nullable();
             $table->timestamps();
         });
     }

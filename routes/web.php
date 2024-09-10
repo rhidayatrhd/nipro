@@ -1,24 +1,28 @@
 <?php
 
-use App\Http\Controllers\AssignRolePermissionController;
-use App\Http\Controllers\AssignUserRoleController;
 use App\Models\Role;
 use App\Models\DataPC;
+use App\Models\PCSpec;
+use App\Http\Requests\DataPCRequest;
 use Illuminate\Support\Facades\Route;
+use function PHPUnit\Framework\isEmpty;
+use App\Http\Controllers\PostController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\DataPCController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\SectionController;
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ImportPCController;
+use App\Http\Controllers\DepartmentController;
 use App\Http\Controllers\PermissionController;
+use App\Http\Controllers\FormRequestController;
 use App\Http\Controllers\ComputerInfoController;
-use App\Http\Controllers\NavigationMenuController;
-use App\Http\Controllers\ProductCategoryController;
-use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProductItemyController;
-use App\Http\Requests\DataPCRequest;
-use App\Models\PCSpec;
-
-use function PHPUnit\Framework\isEmpty;
+use App\Http\Controllers\AssignUserRoleController;
+use App\Http\Controllers\NavigationMenuController;
+use App\Http\Controllers\AssignRolePermissionController;
+use App\Http\Controllers\AssignRolePermissionController1;
+use App\Http\Controllers\SAPUserGuideController;
 
 /*
 |--------------------------------------------------------------------------
@@ -61,15 +65,23 @@ Route::middleware('auth')->group(function () {
     Route::resource('/exportimport/importpc', ImportPCController::class)->except('import_pc');
 
     Route::resource('/informations/computer', ComputerInfoController::class);
+    Route::get('get-sectmenus', [ComputerInfoController::class, 'getSectID'])->name('getSectID');
 
     Route::resource('/accessmanagements/assignuserrole', AssignUserRoleController::class);
     Route::resource('/accessmanagements/assignrolepermission', AssignRolePermissionController::class);
     Route::get('get-submenus', [AssignRolePermissionController::class, 'getSubmenus'])->name('getSubmenus');
+    Route::get('get-permisitems', [AssignRolePermissionController::class, 'getPermisItems'])->name('getPermisItems');
 
-    // Route::resource('/usermenus/productcategory', AssignRolePermissionController::class);
-    Route::resource('/products/productcategories', ProductCategoryController::class);
-    Route::get('/products/productcategories/checkSlug',[ProductCategoryController::class, 'checkSlug'])->name('products.productcategory.checkSlug');
-    Route::resource('/products/productitems', ProductItemyController::class);
+    Route::resource('/masterdatas/productcategories', CategoryController::class);
+    Route::get('/masterdatas/productcategories/checkSlug',[CategoryController::class, 'checkSlug'])->name('products.category.checkSlug');
+    Route::resource('/masterdatas/productitems', ProductItemyController::class);
+
+    Route::resource('/masterdatas/department', DepartmentController::class);
+    Route::resource('/masterdatas/section', SectionController::class);
+
+    Route::resource('/requestforms/it_requestform', FormRequestController::class);
+
+    Route::resource('/userguides/sap_userguide', SAPUserGuideController::class);
 
 });
 

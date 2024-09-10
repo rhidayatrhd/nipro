@@ -3,6 +3,8 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+
+use App\Models\HardwareGroup;
 use Illuminate\Database\Seeder;
 use Database\Seeders\UserRolePermissionSeeder;
 
@@ -24,6 +26,8 @@ class DatabaseSeeder extends Seeder
 
         $this->call([
             DepartmentSeeder::class,
+            HardwareGrpSeeder::class,
+            MasterConfigSeeder::class,
             UserRolePermissionSeeder::class,
             NavigationSeeder::class,
         ]);

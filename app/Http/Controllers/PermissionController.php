@@ -13,7 +13,7 @@ class PermissionController extends Controller
     // Membuat permission menggunakan contructor
     public function __construct()
     {
-        $this->middleware('can:create configurations/permission')->only('create');
+        $this->middleware(['can:admin'])->only('create') || $this->middleware(['can:configurations/permission'])->only('create');
     }
 
     /**
@@ -23,7 +23,7 @@ class PermissionController extends Controller
      */
     public function index(PermissionDataTable $dataTable)
     {
-        $this->authorize('read configurations/permission');
+        $this->authorize('admin', 'read configurations/permission');
         return $dataTable->render('configurations.permission', [
             'menu'     => 'Configuration',
             'title'     => "Permission"

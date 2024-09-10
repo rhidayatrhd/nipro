@@ -93,7 +93,7 @@
             const _form = this
             const formData = new FormData(_form)
             const url = this.getAttribute('action')
-            console.log(url);
+            // console.log(url);
 
             $.ajax({
                 method: 'POST',
@@ -113,8 +113,15 @@
                     $(_form).find('.text-danger.text-small').remove()
                     if (errors) {
                         for (const [key, value] of Object.entries(errors)) {
-                            $(`[hostname='${key}']`).parent().append(`<span class="text-danger text-small">${value}</span>`)
-                            $(`[pctype='${key}']`).parent().append(`<span class="text-danger text-small">${value}</span>`)
+                            $(`[pchost='${key}']`).parent().append(`<span class="text-danger text-small">${value}</span>`)
+                            $(`[ipadrs='${key}']`).parent().append(`<span class="text-danger text-small">${value}</span>`)
+                            $(`[username='${key}']`).parent().append(`<span class="text-danger text-small">${value}</span>`)
+                            $(`[osystem='${key}']`).parent().append(`<span class="text-danger text-small">${value}</span>`)
+                            $(`[brand='${key}']`).parent().append(`<span class="text-danger text-small">${value}</span>`)
+                            $(`[hdd='${key}']`).parent().append(`<span class="text-danger text-small">${value}</span>`)
+                            $(`[ram='${key}']`).parent().append(`<span class="text-danger text-small">${value}</span>`)
+                            $(`[model='${key}']`).parent().append(`<span class="text-danger text-small">${value}</span>`)
+                            $(`[processor='${key}']`).parent().append(`<span class="text-danger text-small">${value}</span>`)
                         }
                     }
                     console.log(errors);

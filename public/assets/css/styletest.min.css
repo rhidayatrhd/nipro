@@ -69,12 +69,23 @@ body.collapse-sidebar .main-sidebar .sidebar-header .text2 {
     text-align: center;
 }
 
+.content-wrapper .pc-entry .card .card-body .row .col-md-6 {
+    padding: 25px;
+}
+.content-wrapper .pc-entry .card .card-body .row .col-md-6 label {
+    margin-top: 5px;
+}
+
 .card.user-role .card-header {
     padding: 5px;
 }
 
 .card.user-role .card-body {
     margin-block-start: 30px;
+}
+
+.card-header.role-permission {
+    padding-bottom: .5em!important;
 }
 
 .card-header>button {
@@ -122,6 +133,10 @@ table.dataTable thead tr,
 .dataTables_info,
 .pagination li a.page-link {
     font-size: 11px;
+}
+
+table.dataTable>tbody>tr {
+    height: 35px;
 }
 
 .sidebar-toggle a {
@@ -280,6 +295,30 @@ body footer {
 .main-sidebar .sidebar-content>ul>li span,
 .main-sidebar .sidebar-content>ul>li>a>i {
     font-size: 0.80em;
+}
+
+.modal-dialog.modal-fullscreen {
+    padding: 30px 30px 50px 30px;
+}
+
+.modal-dialog.modal-fullscreen .modal-content {
+    height: fit-content;
+}
+
+.modal-content {
+    display: inline-table;
+}
+
+.modal-content.pdf-display {
+    height: 100vh;
+}
+
+.modal-content.pdf-display .modal-body {
+    height: calc(100% - 20%);
+}
+
+.modal-content.pdf-display embed.img-preview.form-control {
+    height: 100%;
 }
 
 .sidebar-header {
@@ -485,6 +524,15 @@ body footer {
     text-decoration: none;
     inline-size: 40px
 }
+
+table tbody tr td.text-center a.btn, 
+table tbody tr td.text-center button.btn.show {
+    block-size: 25px;
+    inline-size: 25px;
+    padding: 0;
+    margin-right: 2px;
+}
+
 
 .toggle-mobile {
     font-size: 1.2em;
@@ -1063,6 +1111,10 @@ table.dataTable {
     inline-size: 100%
 }
 
+/* table#role_assignment thead tr th.taction {
+    width: calc(100% - 85%)!important;
+} */
+
 .message-bar {
     background: #f7f7f8;
     display: table;
@@ -1137,6 +1189,10 @@ table.dataTable {
 .icon-hover i {
     color: #027afe;
     margin-inline-end: .3em
+}
+
+.card-body>.list-group.listrole>a:hover {
+    background-color: antiquewhite;
 }
 
 @media only screen and (max-inline-size:500px) {
@@ -1240,6 +1296,15 @@ trix-toolbar [data-trix-button-group="file-tools"] {
 
 .card-body>.row>div {
     padding: 5px;
+}
+
+embed.img-preview.form-control {
+    height: 350px;
+    width: 100%;
+}
+
+textarea.form-control.requestform {
+    height: 310px;
 }
 
 /*# sourceMappingURL=style.min.css.map */

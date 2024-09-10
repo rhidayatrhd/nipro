@@ -16,6 +16,91 @@
     <form action="{{ route('computer.store') }}" method="post">
         @csrf
         <div class="content-wrapper empty">
+            <div class="modal-footer" style="margin-top: -10px;margin-bottom: 15px">
+                <button class="btn btn-primary" type="submit">Save</button>
+                <a href="/dashboard" class="btn btn-secondary m-md-1"><i><span>Close</span></i></a>
+            </div>
+            <div class="row same-height pc-entry">
+                <div class="col-md-12">
+                    <div class="card pc-info">
+                        <div class="card-header">
+                            <h4>Please Fill Additional Information..</h4>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="row">
+                                        <div class="col-md-3 mb-1">
+                                            <label for="comp_user_respon">User Responsible</label>
+                                        </div>
+                                        <div class="col-md-1 mb-1">
+                                            <label> : </label>
+                                        </div>
+                                        <div class="col-md-8 mb-1">
+                                            @if($datapc->isNotEmpty())
+                                            <input type="text" placeholder="User Responsible Name" value="{{ $datapc[0]->username }}" class="form-control" name="comp_user_respon" id="comp_user_respon" autofocus>
+                                            @else
+                                            <input type="text" placeholder="User Responsible Name" value="" class="form-control" name="comp_user_respon" id="comp_user_respon" autofocus>
+                                            @endif
+                                        </div>
+                                        <div class="col-md-3">
+                                            <label for="dept_id">User Department</label>
+                                        </div>
+                                        <div class="col-md-1">
+                                            <label> : </label>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <select name="dept_id" id="dept_id" class="form-select">
+                                                @if($datapc->isNotEmpty())
+                                                <option value="-1" selected>{{ $datapc[0]->userdept }}</option>
+                                                @else
+                                                <option value="-1" selected></option>
+                                                @endif
+                                                @foreach($department as $dept)
+                                                @if(old('dept') == $dept->id)
+                                                <option value="{{ $dept->id }}" selected>{{ $dept->name }}</option>
+                                                @else
+                                                <option value="{{ $dept->id }}">{{ $dept->name }}</option>
+                                                @endif
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="row">
+                                        <input type="hidden" placeholder="User Login by" value="{{ \get_current_user() }}" class="form-control" name="comp_user_login" id="comp_user_login">
+                                        <div class="col-md-3">
+                                            <label for="comp_user">User Section</label>
+                                        </div>
+                                        <div class="col-md-1">
+                                            <label> : </label>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <select name="sect_id" id="sect_id" class="form-select">
+                                                <option value="-1" selected>Select Section</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <label for="comp_user">Host Identity</label>
+                                        </div>
+                                        <div class="col-md-1">
+                                            <label> : </label>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <select name="host_id" id="host_id" class="form-select">
+                                                <option value="-1" selected></option>
+                                                <option value="1">Connect to Nipro Domain(NIJ)</option>
+                                                <option value="2">Connect only to Machine(MCN)</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
             <div class="row same-height">
                 <div class="col-md-4">
                     <div class="card pc-info">
@@ -94,7 +179,6 @@
                         </div>
                     </div>
                 </div>
-
                 <div class="col-md-4">
                     <div class="card pc-info">
                         <div class="card-header">
@@ -106,25 +190,25 @@
                                     <label for="comp_type">Computer Type</label>
                                 </div>
                                 <div class="col-md-1">: </div>
-                                @if(explode('-', $os->csname)[0] == 'NB')
+                                <!-- @if(explode('-', $os->csname)[0] == 'NB')
                                 <div class="col-md-6" id="comp_type" name="comp_type" value="NoteBook">NoteBook</div>
                                 @elseif(explode('-', $os->csname)[0] == 'PC')
                                 <div class="col-md-6" id="comp_type" name="comp_type" value="Desktop Computer">Desktop Computer</div>
                                 @else
                                 <div class="col-md-6" id="comp_type" name="comp_type" value="Unknowed.!">Unknowed.!</div>
+                                @endif -->
+                                @if($comp->pcsystemtype == 1)
+                                <div class="col-md-6" id="comp_type" name="comp_type" value="Desktop Computer">Desktop Computer</div>
+                                @elseif($comp->pcsystemtype == 2)
+                                <div class="col-md-6" id="comp_type" name="comp_type" value="NoteBook">NoteBook</div>
+                                @else
+                                <div class="col-md-6" id="comp_type" name="comp_type" value="Unknowed.!">Unknowed.!</div>
                                 @endif
-
                                 <div class="col-md-5">
                                     <label for="comp_user_login">Computer User Login</label>
                                 </div>
                                 <div class="col-md-1">: </div>
                                 <div class="col-md-6" id="comp_user_login" name="comp_user_login" value="{{ \get_current_user() }}">{{ \get_current_user() }}</div>
-
-                                <div class="col-md-5">
-                                    <label for="comp_user">User Responsibility</label>
-                                </div>
-                                <div class="col-md-1">: </div>
-                                <div class="col-md-6" id="comp_user" name="comp_user" value=""></div>
 
                                 <div class="col-md-5">
                                     <label for="comp_model">Model Type</label>
@@ -178,7 +262,6 @@
                         </div>
                     </div>
                 </div>
-
                 <div class="col-md-4">
                     <div class="card pc-info">
                         <div class="card-header">
@@ -246,15 +329,15 @@
                     </div>
                 </div>
             </div>
-            <div class="modal-footer">
-                <button class="btn btn-secondary m-md-1" type="button" data-dismiss="modal">Close</button>
-                <button class="btn btn-primary" type="submit">Save</button>
-            </div>
         </div>
     </form>
     @else
     @foreach($computer as $comp)
     <div class="content-wrapper">
+        <div class="modal-footer" style="margin-top: -10px;margin-bottom: 15px">
+            <a href="/dashboard" class="btn btn-secondary m-md-1"><i><span>Close</span></i></a>
+            <button class="btn btn-primary" type="submit">Save</button>
+        </div>
         <div class="row same-height">
             <div class="col-md-4">
                 <div class="card pc-info">
@@ -511,7 +594,21 @@
 
         const modal = new bootstrap.Modal($('#modalPCAction'))
 
-        
+        $('#dept_id').on('change', function() {
+            var deptid = this.value;
+            $('#sect_id').html('');
+            $.ajax({
+                url: `{{ Route('getSectID') }}?dept_id=` + deptid,
+                type: 'get',
+                success: function(res) {
+                    $('#sect_id').html('<option value=""></option>');
+                    $.each(res, function(key, value) {
+                        $('#sect_id').append('<option value="' + value.id + '">' + value.name + '</option>');
+                    });
+                }
+            });
+        });
+
         // function store() {
         //     $('#formPCAction').on('submit', function(e) {
         //         e.preventDefault()

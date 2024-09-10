@@ -25,7 +25,7 @@
 <body>
     @include('layouts.head')
     @yield('container')
-
+    @include('layouts.foot')
     <!-- Bootstrap JS -->
     <link rel="stylesheet" href="{{ asset('vendor/bootstrap/js/bootstrap.min.js') }}">
     <!-- <link rel="stylesheet" href="{{ asset('vendor/bootstrap/js/bootstrap.bundle.min.js') }}"> -->

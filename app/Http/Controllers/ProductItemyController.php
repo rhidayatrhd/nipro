@@ -2,18 +2,20 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\ProductItem;
-use Illuminate\Support\Str;
 use Illuminate\Http\Request;
-use App\Models\ProductCategory;
+use Illuminate\Support\Str; 
+use Illuminate\Support\Facades\Storage;
 use App\DataTables\productItemDataTable;
+use Illuminate\Validation\Rule;
 
 class ProductItemyController extends Controller
 {
     // Membuat permission menggunakan contructor
     public function __construct()
     {
-        $this->middleware('can:create products/productitems')->only('create');
+        $this->middleware('can:create masterdatas/productitems')->only('create');
     } 
 
     /**
@@ -23,7 +25,7 @@ class ProductItemyController extends Controller
      */
     public function index(productItemDataTable $dataTable)
     {
-        $this->authorize('read products/productitems');
+        $this->authorize('read masterdatas/productitems');
         return $dataTable->render('products.productitems.index', [
             'menu'     => 'Product Maintenance',
             'title'     => 'Product Item'
@@ -40,8 +42,8 @@ class ProductItemyController extends Controller
         return \view('products.productitems.create', [
             'productitem' => new ProductItem(),
             'menu'     => 'Product Maintenance',
-            'title'     => 'Create Product Category',
-            'categories' => ProductCategory::all(), 
+            'title'     => 'Create Product Item',
+            'categories' => Category::all(), 
         ]);
     }
 
@@ -54,21 +56,25 @@ class ProductItemyController extends Controller
     public function store(Request $request)
     {
         // \dd($request);
-        $validate = $request->validate([
+        $validateData = $request->validate([
             'title'         => 'required|unique:product_items|max:255',
-            'category_id'   => 'required',
-            'image'         => 'image|file|max:1024',
+            'category_id'   => 'required|not_in:-1',
+            'image'         => 'required|image|file|max:1024',
             'body'          => 'required'
-        ]);
+        ]); 
 
         if ($request->file('image')) {
-            $validate['image'] = $request->file('image')->store('post-images');
+            $validateData['image'] = $request->file('image')->store('post-images');
         }
-        $validate['user_id'] = \auth()->user()->id;
-        $validate['excerpt'] = Str::limit(\strip_tags($request->body), 100);
+        $validateData['user_id'] = \auth()->user()->id; 
+        $validateData['excerpt'] = Str::limit(\strip_tags($request->body), 100);
 
-        ProductItem::create($validate);
-        return \redirect('/products/productitems')->with('success', 'New Product Item was created!');
+        ProductItem::create($validateData);
+        // return \redirect('/masterdatas/productitems')->with('success', 'New Product Item was created!');
+        return \response()->json([
+            'status'        => 'success',
+            'message'       => 'New Product Item was created!'
+        ]);
     }
 
     /**
@@ -98,14 +104,14 @@ class ProductItemyController extends Controller
      */
     public function edit(ProductItem $productitem)
     {
-        // \dd('test');
+        // \dd($productitem->body);
         return \view('products.productitems.create', [
-            // \compact('productitem'),
             'productitem' => $productitem,
             'menu'     => 'Product Maintenance',
             'title'     => 'Edit Product',
-            'categories' => ProductCategory::all(),
-        ]);
+            'categories' => Category::all(),
+        ],
+        \compact('productitem'));
     }
 
     /**
@@ -115,9 +121,30 @@ class ProductItemyController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, ProductItem $productitem)
     {
-        //
+        $rules = [ 
+            'category_id'   => 'required|not_in:-1',
+            'image'         => 'image|file|max:1024',
+            'body'          => 'required',
+        ];
+        $validateData = $request->validate($rules);
+
+        if ($request->file('image')) {
+            if ($request->oldImage) {
+                Storage::delete($request->oldImage);
+            }
+            $validateData['image'] = $request->file('image')->store('post-images');
+        }
+        $validateData['excerpt'] = Str::limit(\strip_tags($request->body), 100);
+        $productitem::where('id', $productitem->id)
+                ->update($validateData);
+        // return redirect('/masterdatas/productitems')
+        // ->with('success', 'Product Item has been updated!');
+        return \response()->json([
+            'status'        => 'success',
+            'message'       => 'Data already updated!'
+        ]);
     }
 
     /**
@@ -128,10 +155,16 @@ class ProductItemyController extends Controller
      */
     public function destroy(ProductItem $productitem)
     {
-        $productitem->delete();
-        return \response()->json([
-            'status'        => 'success',
-            'message'       => 'Data was deleted!'
-        ]);
+        // $productitem->delete();
+        // return \response()->json([
+        //     'status'        => 'success',
+        //     'message'       => 'Data was deleted!'
+        // ]);
+        if ($productitem->image) {
+            Storage::delete($productitem->image);
+        }
+        ProductItem::destroy($productitem->id);
+
+        return redirect('/masterdatas/productitems')->with('success', 'Product Item has been deleted!');        
     }
 }

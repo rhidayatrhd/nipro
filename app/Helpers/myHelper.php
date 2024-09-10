@@ -2,7 +2,9 @@
 
 use App\Models\DataPC;
 use App\Models\Navigation;
-use App\Models\ProductCategory;
+use App\Models\Category;
+use App\Models\Department;
+use App\Models\Section;
 
 if (!function_exists('getMenus')) {
     function getMenus()
@@ -21,6 +23,20 @@ if (!function_exists('getHosts')) {
 if (!function_exists('getProducts')) {
     function getProducts()
     {
-        return ProductCategory::all();
+        return Category::all();
+    }
+}
+
+if (!function_exists('getDepartments')) {
+    function getDepartments()
+    {
+        return Department::all();
+    }
+}
+
+if (!function_exists('getSections')) {
+    function getSections()
+    {
+        return Section::all();
     }
 }

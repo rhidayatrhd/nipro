@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Post;
-use App\Models\ProductCategory;
+use App\Models\Category;
 use App\Models\ProductItem;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -18,8 +18,8 @@ class PostController extends Controller
     public function index()
     {
         $title = '';
-        if (\request('productcategory')) {
-            $product = ProductCategory::firstWhere('slug', \request('productcategory'));
+        if (\request('categories')) {
+            $product = Category::firstWhere('slug', \request('categories'));
             $title = ' in ' . $product->name;
         }
         if (\request('author')) {
@@ -30,7 +30,7 @@ class PostController extends Controller
         return \view('posts', [
             'menu'     => 'Products',
             'title'     => 'All Product' . $title,
-            'posts'     => ProductItem::latest()->filter(\request(['search', 'productcategory', 'author']))->paginate(7)->withQueryString()
+            'posts'     => ProductItem::latest()->filter(\request(['search', 'categories', 'author']))->paginate(7)->withQueryString()
         ]);
     }
 

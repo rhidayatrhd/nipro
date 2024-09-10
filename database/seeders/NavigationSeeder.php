@@ -15,94 +15,141 @@ class NavigationSeeder extends Seeder
      */
     public function run()
     {
-        Navigation::create([
+        $config = Navigation::create([
             'name'      => 'Configuration',
             'url'       => 'configurations',
             'icon'      => 'ti-desktop',
-            'main_menu' => null
+            'main_menu' => null,
+            'sort'      => 1,
         ]);
-        Navigation::create([
-            'name'      => 'Access Management',
-            'url'       => 'accessmanagements',
-            'icon'      => 'ti-link',
-            'main_menu' => null
-        ]);
-        Navigation::create([
-            'name'      => 'User Menu',
-            'url'       => 'usermenus',
-            'icon'      => 'ti-menu-alt',
-            'main_menu' => null
-        ]);
-        Navigation::create([
-            'name'      => 'Information',
-            'url'       => 'informations',
-            'icon'      => 'ti-info-alt',
-            'main_menu' => null
-        ]);
-        Navigation::create([
-            'name'      => 'Export & Import',
-            'url'       => 'exportimport',
-            'icon'      => 'ti-upload',
-            'main_menu' => null
-        ]);
-        
-        Navigation::create([
+        $config->subMenus()->create([
             'name'      => 'Role',
             'url'       => 'configurations/role',
             'icon'      => '',
-            'main_menu' => 1
+            'main_menu' => 1,
+            'sort'      => 1,
         ]);
-        Navigation::create([
+        $config->subMenus()->create([
             'name'      => 'Permission',
             'url'       => 'configurations/permission',
             'icon'      => '',
-            'main_menu' => 1
+            'main_menu' => 1,
+            'sort'      => 1,
         ]);
-        Navigation::create([
+        $config->subMenus()->create([
             'name'      => 'Navigation Menu',
             'url'       => 'configurations/navigationmenu',
             'icon'      => '',
-            'main_menu' => 1
+            'main_menu' => 1,
+            'sort'      => 1,
         ]);
 
-        Navigation::create([
+        $accman = Navigation::create([
+            'name'      => 'Access Management',
+            'url'       => 'accessmanagements',
+            'icon'      => 'ti-link',
+            'main_menu' => null,
+        ]);
+        $accman->subMenus()->create([
             'name'      => 'Assign Role Permission',
             'url'       => 'accessmanagements/assignrolepermission',
             'icon'      => '',
-            'main_menu' => 2
+            'main_menu' => 1,
         ]);
-        Navigation::create([
+        $accman->subMenus()->create([
             'name'      => 'Assign User Role',
             'url'       => 'accessmanagements/assignuserrole',
             'icon'      => '',
-            'main_menu' => 2
+            'main_menu' => 1,
         ]);
 
-        Navigation::create([
+        $masdata = Navigation::create([
+            'name'      => 'Master Data',
+            'url'       => 'masterdatas',
+            'icon'      => 'ti-book',
+            'main_menu' => null,
+        ]);
+        $masdata->subMenus()->create([
             'name'      => 'Master Product',
-            'url'       => 'usermenus/masterproduct',
+            'url'       => 'masterdatas/productcategories',
             'icon'      => '',
-            'main_menu' => 3
+            'main_menu' => 1,
         ]);
-        Navigation::create([
+        $masdata->subMenus()->create([
             'name'      => 'Product Item',
-            'url'       => 'usermenus/productitem',
+            'url'       => 'masterdatas/productitems',
             'icon'      => '',
-            'main_menu' => 3
+            'main_menu' => 1,
+        ]);
+        $masdata->subMenus()->create([
+            'name'      => 'Department',
+            'url'       => 'masterdatas/department',
+            'icon'      => '',
+            'main_menu' => 1,
+        ]);
+        $masdata->subMenus()->create([
+            'name'      => 'Section',
+            'url'       => 'masterdatas/section',
+            'icon'      => '',
+            'main_menu' => 1,
         ]);
 
-        Navigation::create([
+        $info = Navigation::create([
+            'name'      => 'Information',
+            'url'       => 'informations',
+            'icon'      => 'ti-info-alt',
+            'main_menu' => null,
+        ]);
+        $info->subMenus()->create([
             'name'      => 'Computer Info',
             'url'       => 'informations/computer',
             'icon'      => '',
-            'main_menu' => 4
+            'main_menu' => 1,
         ]);
 
-        Navigation::create([
-            'name'      => 'Computer Data',
-            'url'       => 'exportimport/datapc', 
-            'icon'      => '',
-            'main_menu' => 5
+        $upld = Navigation::create([
+            'name'      => 'Upload Data',
+            'url'       => 'exportimport',
+            'icon'      => 'ti-upload',
+            'main_menu' => null,
         ]);
+        $upld->subMenus()->create([
+            'name'      => 'Computer Data',
+            'url'       => 'exportimport/datapc',
+            'icon'      => '',
+            'main_menu' => 1,
+        ]);
+
+        $doctrain = Navigation::create([
+            'name'      => 'Training Document',
+            'url'       => 'userguides',
+            'icon'      => 'ti-bookmark-alt',
+            'main_menu' => null,
+            'sort'      => 2,
+        ]);
+        $doctrain->subMenus()->create([
+            'name'      => 'SAP Training Material',
+            'url'       => 'userguides/sap_userguide',
+            'icon'      => '',
+            'main_menu' => 1,
+            'sort'      => 2,
+        ]);
+        
+        $docform = Navigation::create([
+            'name'      => 'Form Request',
+            'url'       => 'requestforms',
+            'icon'      => 'ti-layout-tab',
+            'main_menu' => null,
+            'sort'      => 2,
+        ]);
+        $docform->subMenus()->create([
+            'name'      => 'IT Form Request',
+            'url'       => 'requestforms/it_requestform',
+            'icon'      => '',
+            'main_menu' => 1,
+            'sort'      => 2,
+        ]);
+
+        
     }
 }

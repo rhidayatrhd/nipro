@@ -1,5 +1,9 @@
 div @extends('layouts.dashmain')
 
+@push('css')
+<link rel="stylesheet" href="{{ asset('css/trix.css') }}">
+@endpush
+
 @section('content')
 <title>Nipro &mdash; {{ $title }}</title>
 <div class="main-content">
@@ -12,26 +16,19 @@ div @extends('layouts.dashmain')
                 <div class="card">
                     <div class="card-header">
                         <h3 class="mb-3">{{ $product->title }}</h3>
-                        <a href="/products/productitems" class="btn btn-secondary"><i><span class="ti-back-left"></span></i></a>
-                        <!-- <a href="/products/productitems/{{ $product->id }}/edit" class="btn btn-warning"><span data-feather="edit"></span>Edit</a> -->
-                        <button type="button" name="edit" id="edit" class="btn btn-warning" value="{{ $product->id }}"><i><span class="ti-pencil-alt"></span></i></button>
-                        <button type="button" class="btn btn-danger" name="delete" id="delete" value="{{ $product->id }}"><i class="ti-trash"></i></button>
-                        <!-- <form action="/products/productitems/{{ $product->slug }}" method="post" class="d-inline">
-                            @method('delete')
-                            @csrf
-                            <button class="btn bg-danger" onclick="return confirm('Are you sure')"><span data-feather="x-cicle"></span>Delete</button>
-                        </form> -->
+                        <a href="/masterdatas/productitems" class="btn btn-secondary"><i><span class="ti-back-left"></span></i></a>
+                        <button type="submit" name="edit" id="edit" class="btn btn-warning" data-id="{{ $product->id }}" data-jenis="edit"><i><span class="ti-pencil-alt"></span></i></button>
+                        <a href="/masterdatas/productitems" class="btn btn-danger" name="delete" id="delete" data-id="{{ $product->id }}" data-jenis="delete"><i><span class="ti-trash"></span></i></a>
                     </div>
                     <div class="content-wrapper">
                         <div class="card-body">
                             @if($product->image)
-                            <div style="max-block-size: 350px; overflow:hidden">
-                                <img src="{{ asset('storage/' . $product->image) }}" alt="{{ $product->productcategory->name }}" srcset="img-fluid mt-3" class="img-preview img-fluid mb-3 col-sm-9">
+                            <div style="max-block-size: 350px; overflow:hidden;display:inline-table">
+                                <img src="{{ asset('storage/' . $product->image) }}" alt="{{ $product->categories->name }}" srcset="img-fluid mt-3" class="img-preview img-fluid mb-3 col-sm-9">
                             </div>
                             @else
-                            <img src="https://source.unsplash.com/1200x400? {{ $product->productcategory->name }}" alt="{{ $product->productcategory->name }}" srcset="img-fluid mt-3" class="img-preview img-fluid mb-3 col-sm-9">
+                            <img src="https://source.unsplash.com/1200x400? {{ $product->categories->name }}" alt="{{ $product->categories->name }}" srcset="img-fluid mt-3" class="img-preview img-fluid mb-3 col-sm-9">
                             @endif
-
                             <article class="my-3 text-small">{!! $product->body !!}</article>
                         </div>
                     </div>
@@ -41,7 +38,7 @@ div @extends('layouts.dashmain')
     </div>
 
     <div class="modal fade" id="modalShowProductItemAction" tabindex="-1" aria-labelledby="modalActionLabel" aria-hidden="true">
-        <div class="modal-dialog modal-xl"></div>
+        <div class="modal-dialog modal-xl modal-dialog-scrollable"></div>
     </div>
 </div>
 @endsection
@@ -49,14 +46,17 @@ div @extends('layouts.dashmain')
 @push('js')
 <script src="{{ asset('vendor/jquery/jquery.min.js') }}"></script>
 <script src="{{ asset('vendor/sweetalert2/sweetalert2.all.min.js') }}"></script>
+<script type="text/javascript" src="{{ asset('js/trix.js') }}"></script>
 
 <script>
     const modal = new bootstrap.Modal($('#modalShowProductItemAction'))
 
     $('#delete').on('click', function() {
-        let id = $(this).val()
+        let data = $(this).data();
+        let id = data.id;
+        let jenis = data.jenis;
         Swal.fire({
-            title: "Are you sure?",
+            title: " Are you sure?",
             text: "You won't be able to revert this!",
             icon: "warning",
             showCancelButton: !0,
@@ -67,28 +67,67 @@ div @extends('layouts.dashmain')
             t.isConfirmed &&
                 $.ajax({
                     method: 'DELETE',
-                    url: `{{ url('products/productitems/') }}/${id}`,
+                    url: `{{ url('masterdatas/productitems/') }}/${id}`,
                     headers: {
                         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                     },
                     success: function(res) {
-                        Swal.fire("Deleted!", res.message, res.status)
+                        window.LaravelDataTables["productitem-table"].ajax.reload();
+                        Swal.fire("Deleted!", res.message, res.status);
                     }
-                })
-        })
-    })
+                });
+        });
+    });
 
     $('#edit').on('click', function() {
-        let id = $(this).val()
+        let data = $(this).data();
+        let id = data.id;
+        let jenis = data.jenis
         $.ajax({
             method: 'get',
-            url: `{{ url('products/productitems/') }}/${id}/edit`,
+            url: `{{ url('masterdatas/productitems/') }}/${id}/edit`,
             success: function(res) {
-                $('#modalShowProductItemAction').find('.modal-dialog').html(res)
-                modal.show()
-                store()
+                $('#modalShowProductItemAction').find('.modal-dialog').html(res);
+                modal.show();
+                store();
             }
+        });
+    });
+
+    function store() {
+        $('#formProductItemAction').on('submit', function(e) {
+            e.preventDefault();
+
+            const _form = this;
+            const formData = new FormData(_form);
+            const url = this.getAttribute('action');
+            $.ajax({
+                method: 'POST',
+                url,
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                data: formData,
+                processData: false,
+                contentType: false,
+                success: function(res) {
+                    location.reload(true);
+                    modal.hide();
+                },
+                error: function(res) {
+                    let errors = res.responseJSON?.errors;
+                    $(_form).find('.text-danger.text-small').remove();
+                    if (errors) {
+                        for (const [key, value] of Object.entries(errors)) {
+                            $(`[category_id='${key}']`).parent().append(`<span class="text-danger text-small">${value}</span>`);
+                            $(`[image='${key}']`).parent().append(`<span class="text-danger text-small">${value}</span>`);
+                            $(`[body='${key}']`).parent().append(`<span class="text-danger text-small">${value}</span>`);
+                        }
+                    }
+                    console.log(errors);
+                }
+            });
         })
-    })
+    }
 </script>
 @endpush

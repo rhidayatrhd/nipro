@@ -6,27 +6,22 @@
         @endif
         <div class="modal-header">
             <h5 class="modal-title" id="largeModalLabel">Product Item Menu</h5>
-            <button class="btn-close" type="button" data-dismiss="modal" aria-label="Close"></button>
+            <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
             <div class="row">
                 <div class="col-md-6">
                     <div class="mb-3">
-                        <label for="title" class="form-label">Product Title</label> 
+                        <label for="title" class="form-label">Product Title</label>
                         @if($productitem->id)
-                        <input type="text" placeholder="Title of Product" value="{{ $productitem->id ? $productitem->title : old('title') }}" class="form-control @error('title') is-invalid @enderror" name="title" id="title" read disabled>
+                        <input type="text" name="title" id="title" placeholder="Title of Product" value="{{ old('title', $productitem->title) }}" class="form-control" disabled readonly>
                         @else
-                        <input type="text" placeholder="Title of Product" value="{{ $productitem->id ? $productitem->title : old('title') }}" class="form-control @error('title') is-invalid @enderror" name="title" id="title">
+                        <input type="text" name="title" id="title" placeholder="Title of Product" value="{{ old('title', $productitem->title) }}" class="form-control">
                         @endif
-                        <!-- @error('title') -->
-                            <div class="invalid-feedback">test</div>
-                        <!-- @enderror -->
                     </div>
-                </div>
-                <div class="col-md-6">
                     <div class="mb-3">
-                        <label for="category" class="form-label">Product Category</label>
-                        <select name="category_id" id="category_id" class="form-select" value="{{ $productitem->id ? $productitem->name : old('title') }}">
+                        <label for="category_id" class="form-label">Product Category</label>
+                        <select name="category_id" id="category_id" class="form-select" value="{{ old('category_id', $productitem->id) }}">
                             <option value="-1" selected></option>
                             @foreach($categories as $category)
                             @if(old('category') == $category->id || $productitem->category_id == $category->id)
@@ -38,13 +33,18 @@
                         </select>
                     </div>
                 </div>
-            </div>
-            <div class="row">
                 <div class="col-md-6">
                     <div class="mb-3">
                         <label for="image" class="form-label">Product Image</label>
-                        <img class="img-preview img-fluid mb-3 col-sm-5" src="{{ $productitem->image ? asset($productitem->image) : asset(old('image')) }}">
-                        <input type="file" class="form-control" name="image" id="image" onchange="previewImage()">
+                        @if($productitem->id)
+                        <input type="hidden" name="oldImage" value="{{ $productitem->image }}">
+                        @endif
+                        @if($productitem->image)
+                        <img src="{{ asset('storage/' . $productitem->image) }}" class="img-preview img-fluid mb-3 col-sm-5 d-block">
+                        @else
+                        <img class="img-preview img-fluid mb-3 col-sm-5 d-block">
+                        @endif
+                        <input type="file" name="image" id="image" class="form-control" onchange="previewImage()">
                     </div>
                 </div>
             </div>
@@ -52,15 +52,19 @@
                 <div class="col-md-12">
                     <div class="mb-3">
                         <label for="body" class="form-label">Product Item Information Details</label>
-                        <input type="hidden" name="body" id="body" value="{{ old('body') }}">
+                        <input type="hidden" name="body" id="body" value="{{ $productitem->body }}" class="form-control">
                         <trix-editor input="body"></trix-editor>
                     </div>
                 </div>
             </div>
         </div>
         <div class="modal-footer">
+            @if($productitem->id)
+            <button class="btn btn-primary" type="submit" href="/masterdatas/productitems/{{ $productitem->id }}">Save</button>
+            @else
             <button class="btn btn-primary" type="submit">Save</button>
-            <a href="/products/productitems" class="btn btn-secondary">Cancel</a>
+            @endif
+            <a href="/masterdatas/productitems" class="btn btn-secondary">Cancel</a>
         </div>
     </form>
 </div>
@@ -84,8 +88,3 @@
         }
     }
 </script>
-<!-- <style>
-    trix-toolbar [data-trix-button-group="file-tools"] {
-        display: none;
-    }
-</style> -->

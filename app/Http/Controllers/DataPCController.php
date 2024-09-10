@@ -8,6 +8,8 @@ use App\Imports\DataPCImport;
 use App\DataTables\DataPCDataTable;
 use App\Http\Requests\DataPCRequest;
 use App\Imports\PCImport;
+use App\Models\Department;
+use App\Models\Section;
 use Excel;
 use Illuminate\Http\Client\Request as ClientRequest;
 
@@ -39,7 +41,13 @@ class DataPCController extends Controller
      */
     public function create()
     {
-        return \view('exportimport.datapc-action', ['datapc' => new DataPC()]);
+        $hardcost = Department::all();
+        $secost = Section::all();
+        return \view('exportimport.datapc-action', [
+            'datapc' => new DataPC(),
+            'deptcost'   => $hardcost,
+            'sectcost'   => $secost
+        ]);
     }
 
 
@@ -51,9 +59,20 @@ class DataPCController extends Controller
      */
 
     // public function store(Request $request)
-    public function store(Request $request)
+    public function store(DataPCRequest $request)
     {
-      
+    //   \dd($request);
+    //   $validateData = $request->validate([
+    //     'pchost'        => 'required|unique:computers|max:20',
+    //     'ipadrs'        => 'required',
+    //     'username'      => 'required',
+    //     'osystem'       => 'required',
+    //   ]);
+      DataPC::create($request->all());
+      return \response()->json([
+            'status'        => 'success',
+            'message'       => 'New Data PC was created!'
+      ]);
     }
 
     /**
@@ -76,7 +95,13 @@ class DataPCController extends Controller
     public function edit(DataPC $datapc)
     {
         // $pc = $dpc->all();
-        return \view('exportimport.datapc-action', \compact('datapc'));
+        $hardcost = Department::all();
+        $secost = Section::all();
+        return \view('exportimport.datapc-action', [
+                'deptcost'   => $hardcost,
+                'sectcost'   => $secost
+        ], 
+        \compact('datapc'));
     }
 
     /**
@@ -86,11 +111,24 @@ class DataPCController extends Controller
      * @param  \App\Models\DataPC  $dataPC
      * @return \Illuminate\Http\Response
      */
-    public function update(DataPCRequest $request, DataPC $datapc)
+    public function update(Request $request, DataPC $datapc)
     {
         // \dd($request->pchost);
-        $datapc->pchost = $request->pchost;
-        $datapc->name = $request->name;
+        $rules = [
+            'pchost'        => 'required|max:20',
+            'ipadrs'        => 'required',
+            'username'      => 'required',
+            'osystem'       => 'required',
+        ];
+        $request->validate($rules);
+        if ($request->pchost !== $datapc->pchost) {
+            $request->validate([
+                'pchost'        => 'required|unique:computers|max:20',
+            ]);
+            $datapc->hpchost = $datapc->pchost;
+            $datapc->pchost = $request->pchost;
+        }
+        $datapc->asset_id = $request->asset_id;
         $datapc->pctype = $request->pctype;
         $datapc->brand = $request->brand;
         $datapc->model = $request->model;
@@ -102,6 +140,9 @@ class DataPCController extends Controller
         $datapc->username = $request->username;
         $datapc->userlevel = $request->userlevel;
         $datapc->userdept = $request->userdept;
+        $datapc->cost_ctr = $request->cost_ctr;
+        $datapc->dept_id = $request->dept_id;
+        $datapc->sect_id = $request->sect_id;
         $datapc->useremail = $request->useremail;
         $datapc->osystem = $request->osystem;
         $datapc->spreadsheet = $request->spreadsheet;
@@ -121,9 +162,10 @@ class DataPCController extends Controller
      * @param int &id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(DataPC $pc)
+    public function destroy(DataPC $datapc)
     {
-        $pc->delete();
+        // \dd($datapc->pchost);
+        $datapc->delete();
         return \response()->json([
             'status'    => 'success',
             'message'   => 'Data was Deleted!'

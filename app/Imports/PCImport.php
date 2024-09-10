@@ -23,7 +23,7 @@ class PCImport implements ToCollection
                 if ($count > 0) {} else {
                 // \dd($row[2]);
                 $data['pchost'] = !empty($row[1]) ? $row[1] : '';                
-                $data['name'] = !empty($row[2]) ? $row[2] : '';                
+                $data['asset_id'] = !empty($row[2]) ? $row[2] : '';                
                 $data['pctype'] = !empty($row[3]) ? $row[3] : '';
                 $data['brand'] = !empty($row[4]) ? $row[4] : '';
                 $data['model'] = !empty($row[5]) ? $row[5] : '';
@@ -40,7 +40,7 @@ class PCImport implements ToCollection
                 $data['spreadsheet'] = !empty($row[16]) ? $row[16] : '';
                 $data['usedfor'] = !empty($row[17]) ? $row[17] : '';
                 $data['antivirus'] = !empty($row[18]) ? $row[18] : '';
-                $data['oldhost'] = !empty($row[19]) ? $row[19] : '';
+                $data['cost_ctr'] = !empty($row[19]) ? $row[19] : '';
                 // \dd($data);
 
                 DataPC::create($data);

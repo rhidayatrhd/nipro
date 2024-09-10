@@ -3,12 +3,9 @@
 namespace App\DataTables;
 
 use App\Models\Navigation;
-use Yajra\DataTables\Html\Button;
 use Yajra\DataTables\Html\Column;
 use Illuminate\Support\Facades\Gate;
 use Yajra\DataTables\EloquentDataTable;
-use Yajra\DataTables\Html\Editor\Editor;
-use Yajra\DataTables\Html\Editor\Fields;
 use Yajra\DataTables\Services\DataTable;
 use Yajra\DataTables\Html\Builder as HtmlBuilder;
 use Illuminate\Database\Eloquent\Builder as QueryBuilder;
@@ -35,10 +32,10 @@ class NavigationMenuDataTable extends DataTable
                 'action',
                 function ($row) {
                     $action = '';
-                    if (Gate::allows('update configurations/navigationmenu')) {
+                    if (Gate::allows('update configurations/navigationmenu') || Gate::allows('admin')) {
                         $action = '<button type="button" data-id=' . $row->id . ' data-jenis="edit" class="btn btn-primary btn-sm action"><i class="ti-pencil"></i></button>';
                     }
-                    if (Gate::allows('delete configurations/navigationmenu')) {
+                    if (Gate::allows('delete configurations/navigationmenu') || Gate::allows('admin')) {
                         $action .= ' <button type="button" data-id=' . $row->id . ' data-jenis="delete" class="btn btn-danger btn-sm action"><i class="ti-trash"></i></button>';
                     }
                     return $action;
@@ -70,7 +67,7 @@ class NavigationMenuDataTable extends DataTable
             ->columns($this->getColumns())
             ->minifiedAjax()
             //->dom('Bfrtip')
-            ->orderBy(0,'asc');
+            ->orderBy(4,'asc');
     }
 
     /**
